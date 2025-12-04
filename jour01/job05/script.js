@@ -1,8 +1,8 @@
 function afficherjourssemaines() {
 
     const jourssemaines = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
-    jourssemaines.forEach((item) => {
-        console.log(`${item}`);
+    jourssemaines.forEach((jour) => {
+        console.log(`${jour}`);
     });
 
 }

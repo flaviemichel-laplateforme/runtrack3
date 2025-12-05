@@ -6,8 +6,14 @@
     <title>Document</title>
     <script src="./script.js"></script>
   </head>
+  
   <body>
+
     <div id="boite">Je suis une boîte !</div>
     <button onclick="toggleBoite()">Afficher/Masquer</button>
+
+
+
+    <script src="./script.js"></script>
   </body>
 </html>

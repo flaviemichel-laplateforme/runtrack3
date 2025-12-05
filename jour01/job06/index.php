@@ -10,7 +10,7 @@
 </head>
 
 <body>
-
+<script>fizzBuzz()</script>
 </body>
 
 </html>

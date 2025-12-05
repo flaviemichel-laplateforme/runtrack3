@@ -13,9 +13,9 @@ function afficherjourssemaines2() {
 
 
     const jourssemaines = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
-    const iterateur = jourssemaines.keys();
-    for (const key of iterateur) {
-        console.log(`${jourssemaines[key]}`);
+    // const iterateur = jourssemaines.keys();
+    for (const jour of jourssemaines) {
+        console.log(`${jour}`);
     }
 }
 

@@ -9,8 +9,7 @@
 
 <body>
 
-    <button id="button">Cliquez-moi</button> 
-    <p id="compteur">0</p>
+   <textarea  id="keylogger"></textarea>
     
     
 

@@ -1,9 +1,15 @@
+document.addEventListener("keydown", function (event) {
+    var textarea = document.getElementById("keylogger");
+    var key = event.key;
 
-var compteur = 0;
+    if (/^[a-zA-Z]$/.test(key)) {
 
-function addone() {
-    compteur = compteur + 1;
-    document.getElementById("compteur").textContent = compteur;
-}
+        if (document.activeElement === textarea) {
+            event.preventDefault(); // Empêche la lettre normale de s'afficher
+            textarea.value += key + key; // Ajoute la lettre 2 fois
+        } else {
+            textarea.value += key;
+        }
+    }
 
-document.getElementById("button").addEventListener("click", addone);
+});

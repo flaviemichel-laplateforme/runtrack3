@@ -1,18 +1,9 @@
-// Job 01
 
-// Créez un < article > ayant comme id “citation” et contenant le texte suivant:
-// "La vie a beaucoup plus d’imagination que nous”.
-// Créez un < button > ayant comme id “button”. Lorsque l’on clique sur le bouton,
-//     récupérez le contenu de l’élément ayant comme id “citation” et affichez le contenu dans
-// la console de développement.
-// La fonction de récupération et d’affichage doit se nommer “citation()”.
-function showhide() {
-    let texte = document.getElementById("texte");
-    console.log(texte);
+var compteur = 0;
 
-    if (texte.style.display === 'none') {
-        texte.style.display = 'block';
-    } else {
-        texte.style.display = 'none';
-    }
+function addone() {
+    compteur = compteur + 1;
+    document.getElementById("compteur").textContent = compteur;
 }
+
+document.getElementById("button").addEventListener("click", addone);

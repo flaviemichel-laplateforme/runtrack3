@@ -9,8 +9,9 @@
 
 <body>
 
-    <article id="texte">“L'important n'est pas la chute, mais l'atterrissage.”</article>
-    <button id="button" onclick="showhide()">Afficher</button> 
+    <button id="button">Cliquez-moi</button> 
+    <p id="compteur">0</p>
+    
     
 
    

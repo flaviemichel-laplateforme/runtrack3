@@ -1,0 +1,14 @@
+body {
+    min-height: 4096px;
+    margin:0;
+    padding: 0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #000;
+    color:white;
+    transition: background-color 0.1s;
+}

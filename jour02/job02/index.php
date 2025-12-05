@@ -9,12 +9,11 @@
 
 <body>
 
-    <article id="citation">La vie a beaucoup plus d’imagination que nous.</article>
-    <button id="button" onclick="citation()">Afficher</button>
+    <article id="texte">“L'important n'est pas la chute, mais l'atterrissage.”</article>
+    <button id="button" onclick="showhide()">Afficher</button> 
+    
 
    
-
-
 
  <script src="./script.js"></script>
 </body>

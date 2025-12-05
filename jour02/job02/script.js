@@ -6,8 +6,13 @@
 //     récupérez le contenu de l’élément ayant comme id “citation” et affichez le contenu dans
 // la console de développement.
 // La fonction de récupération et d’affichage doit se nommer “citation()”.
-function citation() {
-    var citation = document.getElementById("citation");
-    var texte = citation.textContent;
+function showhide() {
+    let texte = document.getElementById("texte");
     console.log(texte);
+
+    if (texte.style.display === 'none') {
+        texte.style.display = 'block';
+    } else {
+        texte.style.display = 'none';
+    }
 }

@@ -644,6 +644,90 @@ element.classList.toggle("maClasse"); // Ajouter/Supprimer
 element.classList.contains("maClasse"); // Vérifier (true/false)
 ```
 
+### 🎨 classList en détail
+
+| Méthode                           | Description                             | Exemple                                          |
+| --------------------------------- | --------------------------------------- | ------------------------------------------------ |
+| `classList.add("classe")`         | Ajoute une classe                       | `el.classList.add("active")`                     |
+| `classList.remove("classe")`      | Supprime une classe                     | `el.classList.remove("active")`                  |
+| `classList.toggle("classe")`      | Ajoute si absente, supprime si présente | `el.classList.toggle("active")`                  |
+| `classList.contains("classe")`    | Vérifie si la classe existe             | `el.classList.contains("active")` → `true/false` |
+| `classList.replace("old", "new")` | Remplace une classe par une autre       | `el.classList.replace("dark", "light")`          |
+
+```javascript
+let element = document.getElementById("monElement");
+
+// Ajouter plusieurs classes en une fois
+element.classList.add("classe1", "classe2", "classe3");
+
+// Toggle avec condition (force)
+element.classList.toggle("active", true); // Force l'ajout
+element.classList.toggle("active", false); // Force la suppression
+
+// Remplacer une classe
+element.classList.replace("old-style", "new-style");
+
+// Accéder à toutes les classes
+console.log(element.classList); // DOMTokenList ["classe1", "classe2"]
+console.log(element.classList.length); // 2
+console.log(element.classList[0]); // "classe1"
+```
+
+### 💡 Exemple : Menu hamburger
+
+```javascript
+let boutonMenu = document.getElementById("btnMenu");
+let menu = document.getElementById("menu");
+
+boutonMenu.addEventListener("click", function () {
+  menu.classList.toggle("ouvert");
+});
+```
+
+```css
+/* CSS correspondant */
+#menu {
+  display: none;
+}
+
+#menu.ouvert {
+  display: block;
+}
+```
+
+### 💡 Exemple : Thème sombre
+
+```javascript
+let boutonTheme = document.getElementById("btnTheme");
+
+boutonTheme.addEventListener("click", function () {
+  document.body.classList.toggle("dark-mode");
+});
+```
+
+```css
+/* CSS correspondant */
+body {
+  background-color: white;
+  color: black;
+}
+
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: white;
+}
+```
+
+### ⚠️ className vs classList
+
+```javascript
+// ❌ className : écrase TOUTES les classes existantes
+element.className = "nouvelle-classe";
+
+// ✅ classList : ajoute SANS écraser les autres
+element.classList.add("nouvelle-classe");
+```
+
 ### Créer des éléments
 
 ```javascript
@@ -698,6 +782,8 @@ bouton.addEventListener("click", handleClick);
 
 ### L'objet event
 
+L'objet `event` contient toutes les informations sur l'événement déclenché.
+
 ```javascript
 document.addEventListener("keydown", function (event) {
   console.log(event.key); // Touche appuyée
@@ -711,6 +797,149 @@ document.addEventListener("click", function (event) {
   console.log(event.clientY); // Position Y de la souris
 });
 ```
+
+### 📋 Propriétés de l'objet `event` (générales)
+
+| Propriété                 | Description                                     |
+| ------------------------- | ----------------------------------------------- |
+| `event.type`              | Type d'événement (`"click"`, `"keydown"`, etc.) |
+| `event.target`            | Élément qui a déclenché l'événement             |
+| `event.currentTarget`     | Élément sur lequel l'écouteur est attaché       |
+| `event.timeStamp`         | Moment où l'événement s'est produit (en ms)     |
+| `event.preventDefault()`  | Empêche le comportement par défaut              |
+| `event.stopPropagation()` | Arrête la propagation aux parents               |
+
+### ⌨️ Propriétés pour les événements clavier (`keydown`, `keyup`)
+
+| Propriété        | Description                   | Exemple                          |
+| ---------------- | ----------------------------- | -------------------------------- |
+| `event.key`      | Caractère de la touche        | `"a"`, `"Enter"`, `"ArrowUp"`    |
+| `event.code`     | Code physique de la touche    | `"KeyA"`, `"Enter"`, `"ArrowUp"` |
+| `event.keyCode`  | Code numérique (⚠️ obsolète)  | `65` pour "A"                    |
+| `event.shiftKey` | Touche Shift enfoncée ?       | `true` / `false`                 |
+| `event.ctrlKey`  | Touche Ctrl enfoncée ?        | `true` / `false`                 |
+| `event.altKey`   | Touche Alt enfoncée ?         | `true` / `false`                 |
+| `event.metaKey`  | Touche Cmd/Windows enfoncée ? | `true` / `false`                 |
+| `event.repeat`   | La touche est maintenue ?     | `true` / `false`                 |
+
+```javascript
+// Exemple : Détecter Ctrl + S
+document.addEventListener("keydown", function (event) {
+  if (event.ctrlKey && event.key === "s") {
+    event.preventDefault();
+    console.log("Sauvegarde personnalisée !");
+  }
+});
+
+// Exemple : Détecter les flèches
+document.addEventListener("keydown", function (event) {
+  switch (event.key) {
+    case "ArrowUp":
+      console.log("Haut");
+      break;
+    case "ArrowDown":
+      console.log("Bas");
+      break;
+    case "ArrowLeft":
+      console.log("Gauche");
+      break;
+    case "ArrowRight":
+      console.log("Droite");
+      break;
+  }
+});
+```
+
+### 🖱️ Propriétés pour les événements souris (`click`, `mousemove`, etc.)
+
+| Propriété       | Description                                  |
+| --------------- | -------------------------------------------- |
+| `event.clientX` | Position X dans la fenêtre                   |
+| `event.clientY` | Position Y dans la fenêtre                   |
+| `event.pageX`   | Position X dans la page (avec scroll)        |
+| `event.pageY`   | Position Y dans la page (avec scroll)        |
+| `event.screenX` | Position X sur l'écran                       |
+| `event.screenY` | Position Y sur l'écran                       |
+| `event.button`  | Bouton cliqué (0=gauche, 1=molette, 2=droit) |
+| `event.buttons` | Boutons actuellement enfoncés                |
+| `event.offsetX` | Position X relative à l'élément              |
+| `event.offsetY` | Position Y relative à l'élément              |
+
+```javascript
+// Suivre la position de la souris
+document.addEventListener("mousemove", function (event) {
+  console.log(`Position: ${event.clientX}, ${event.clientY}`);
+});
+
+// Détecter le clic droit
+document.addEventListener("contextmenu", function (event) {
+  event.preventDefault(); // Empêche le menu contextuel
+  console.log("Clic droit détecté !");
+});
+```
+
+### 📜 Propriétés pour l'événement scroll
+
+| Propriété                               | Description                    |
+| --------------------------------------- | ------------------------------ |
+| `window.scrollX`                        | Position horizontale du scroll |
+| `window.scrollY`                        | Position verticale du scroll   |
+| `document.documentElement.scrollHeight` | Hauteur totale de la page      |
+| `window.innerHeight`                    | Hauteur visible de la fenêtre  |
+
+```javascript
+// Calculer le pourcentage de scroll
+window.addEventListener("scroll", function () {
+  let scrollTop = window.scrollY;
+  let docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  let scrollPercent = (scrollTop / docHeight) * 100;
+  console.log(`Scroll: ${Math.round(scrollPercent)}%`);
+});
+```
+
+### 📝 Propriétés pour les événements de formulaire
+
+| Propriété              | Description                        |
+| ---------------------- | ---------------------------------- |
+| `event.target.value`   | Valeur actuelle de l'input         |
+| `event.target.checked` | État d'une checkbox                |
+| `event.target.files`   | Fichiers sélectionnés (input file) |
+
+```javascript
+// Récupérer la valeur d'un input en temps réel
+document.getElementById("monInput").addEventListener("input", function (event) {
+  console.log("Valeur:", event.target.value);
+});
+
+// Vérifier une checkbox
+document
+  .getElementById("maCheckbox")
+  .addEventListener("change", function (event) {
+    console.log("Cochée:", event.target.checked);
+  });
+```
+
+### 🔄 Différence entre `keydown`, `keyup` et `keypress`
+
+| Événement  | Déclenchement                                             |
+| ---------- | --------------------------------------------------------- |
+| `keydown`  | Quand la touche est **enfoncée** (se répète si maintenue) |
+| `keyup`    | Quand la touche est **relâchée**                          |
+| `keypress` | ⚠️ **Obsolète** - Ne pas utiliser                         |
+
+### 🎯 Valeurs courantes de `event.key`
+
+| Touche    | `event.key`                                               |
+| --------- | --------------------------------------------------------- |
+| Lettres   | `"a"`, `"b"`, `"A"`, `"B"`                                |
+| Chiffres  | `"0"`, `"1"`, `"2"`                                       |
+| Entrée    | `"Enter"`                                                 |
+| Espace    | `" "`                                                     |
+| Échap     | `"Escape"`                                                |
+| Flèches   | `"ArrowUp"`, `"ArrowDown"`, `"ArrowLeft"`, `"ArrowRight"` |
+| Backspace | `"Backspace"`                                             |
+| Tab       | `"Tab"`                                                   |
+| Suppr     | `"Delete"`                                                |
 
 ---
 

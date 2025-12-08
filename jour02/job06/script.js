@@ -1,4 +1,5 @@
 // Le code Konami : ↑ ↑ ↓ ↓ ← → ← → B A
+
 const konamiCode = [
     "ArrowUp",
     "ArrowUp",
@@ -16,6 +17,7 @@ console.log(konamiCode);
 let konamiIndex = 0; //Position actuelle
 
 document.addEventListener("keydown", function (event) {
+
     const key = event.key.toLowerCase();
     const expectedKey = konamiCode[konamiIndex].toLocaleLowerCase();
 

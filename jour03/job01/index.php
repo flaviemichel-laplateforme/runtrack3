@@ -10,6 +10,9 @@
 <body>
 
     <button id="button">Afficher</button>
+    <button id="hide">Cacher</button>
+
+    <p id="text"></p>
 
    
 

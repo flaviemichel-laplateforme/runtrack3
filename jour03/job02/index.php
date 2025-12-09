@@ -46,14 +46,14 @@ button:hover {
     padding: 20px;
     background-color: #e0e0e0;
     border-radius: 10px;
-    min-height: 120px;
+    min-height: 220px;
     margin: 10px auto;
     max-width: 800px;
 }
 
 #source img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     cursor: grab;
     border: 2px solid #999;
     border-radius: 5px;
@@ -73,16 +73,15 @@ button:hover {
     background-color: #d0e8d0;
     border-radius: 10px;
     margin: 10px auto;
-    max-width: 800px;
+    max-width: 900px;
+    height: 600px;
 }
 
 /* Cases de dépôt */
 .dropzone {
-    width: 100px;
-    height: 100px;
-    border: 3px dashed #4CAF50;
+    width: 400px;
+    height: 350px;
     border-radius: 5px;
-    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,8 +93,8 @@ button:hover {
 }
 
 .dropzone img {
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: 110%;
     border-radius: 3px;
 }
 
@@ -160,6 +159,7 @@ button:hover {
 
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
  <script src="./script.js"></script>
 </body>
 

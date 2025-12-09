@@ -13,14 +13,19 @@
 // Sinon, le message “Vous avez perdu” s’affiche en rouge.
 
 $(document).ready(function () {
-    console.log("JQuery prêt");
-    // Bouton melanger
-    $('#melanger').on('click', function (e) {
-        e.preventDefault();
+    console.log("Tout est OK");
 
-        // $("#text").show(1000);//vitesse
-        // $('#text').text("Les logiciels et les cathédrales, c'est un peu la même chose - d'abord on les construit, ensuite on prie.");
-        // console.log("#button");
-    });
+    $('#container img').draggable(
+        {
+            revert: 'invalid',
+            cursor: 'grabbing'
+        }
+    )
 
+    $('.dropzone').droppable({
+        accept: 'img',
+        drop: function (event, ui) {
+            console.log("Une image est déposé!");
+        }
+    })
 });

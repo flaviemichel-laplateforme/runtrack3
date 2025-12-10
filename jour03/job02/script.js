@@ -28,4 +28,26 @@ $(document).ready(function () {
             console.log("Une image est déposé!");
         }
     })
+
+    // BOUTON MÉLANGER
+    $('#melanger').on('click', function () {
+        // Récupérer toutes les images
+        let images = $('#container img').toArray();
+
+        // Algorithme Fisher-Yates pour mélanger
+        for (let i = images.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [images[i], images[j]] = [images[j], images[i]];
+        }
+
+        // Vider le conteneur et remettre dans le nouvel ordre
+        $('#container').empty();
+        images.forEach(img => $('#container').append(img));
+
+        // Réinitialiser le draggable
+        $('#container img').draggable({
+            revert: 'invalid',
+            cursor: 'grabbing'
+        });
+    });
 });

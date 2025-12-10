@@ -12,11 +12,16 @@
 
         <input type="text" id="id" placeholder="ID">
         <input type="text" id="nom" placeholder="nom">
-        <select is="type">
+        <select id="type">
             <option value="">-- Tous les types --</option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
+            <option value="Plante">Plante</option>
+            <option value="Feu">Feu</option>
+            <option value="Eau">Eau</option>
+            <option value="Poison">Poison</option>
+            <option value="Insecte">Insecte</option>
+            <option value="Vol">Vol</option>
+            <option value="Électrik">Électrik</option>
+            <option value="Normal">Normal</option>
         </select>
 
         <input type="button" id="filtrer" value="Filtrer">

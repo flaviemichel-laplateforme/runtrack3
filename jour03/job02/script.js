@@ -25,13 +25,40 @@ $(document).ready(function () {
     $('.dropzone').droppable({
         accept: 'img',
         drop: function (event, ui) {
-            console.log("Une image est déposé!");
+            let dropzone = $(this);
+            let nouvelleImage = ui.draggable;
+
+            console.log("Une image est déposée!");
+
+            // Si la dropzone contient déjà une image, la remettre dans #container
+            if (dropzone.find('img').length > 0) {
+                let ancienneImage = dropzone.find('img');
+                $('#container').append(ancienneImage);
+            }
+
+            // Ajouter la nouvelle image dans la dropzone
+            dropzone.append(nouvelleImage);
+
+            // Repositionner l'image (enlever les styles de position absolue du drag)
+            nouvelleImage.css({
+                top: 0,
+                left: 0,
+                position: 'relative'
+            });
         }
     })
 
     // BOUTON MÉLANGER
     $('#melanger').on('click', function () {
-        // Récupérer toutes les images
+        // Récupérer toutes les images du container ET des dropzones
+        let toutesLesImages = $('#container img, .dropzone img').toArray();
+
+        // Les remettre toutes dans le container
+        toutesLesImages.forEach(function (img) {
+            $('#container').append(img);
+        });
+
+        // Récupérer les images maintenant dans le container
         let images = $('#container img').toArray();
 
         // Algorithme Fisher-Yates pour mélanger
@@ -49,5 +76,38 @@ $(document).ready(function () {
             revert: 'invalid',
             cursor: 'grabbing'
         });
+
+        // Effacer le message
+        $('#message').text('');
+    });
+
+    // BOUTON VÉRIFIER
+    $('#verifier').on('click', function () {
+        let toutCorrect = true;
+        let toutRempli = true;
+
+        // Parcourir toutes les dropzones
+        $('.dropzone').each(function () {
+            let position = $(this).data('position'); // Position attendue
+            let image = $(this).find('img'); // Image dans la dropzone
+
+            // Vérifier si une image est présente
+            if (image.length === 0) {
+                toutRempli = false;
+            }
+            // Vérifier si l'image est au bon endroit
+            else if (image.data('order') !== position) {
+                toutCorrect = false;
+            }
+        });
+
+        // Afficher le message approprié
+        if (!toutRempli) {
+            $('#message').text('⚠️ Placez toutes les images !').css('color', 'orange');
+        } else if (toutCorrect) {
+            $('#message').text('🎉 Vous avez gagné !').css('color', 'green');
+        } else {
+            $('#message').text('❌ Vous avez perdu !').css('color', 'red');
+        }
     });
 });

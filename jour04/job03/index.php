@@ -24,7 +24,7 @@
             <option value="Normal">Normal</option>
         </select>
 
-        <input type="button" id="filtrer" value="Filtrer">
+        <input type="button" id="filter" value="Filtrer">
 
 
     </form>

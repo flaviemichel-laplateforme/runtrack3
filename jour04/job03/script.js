@@ -49,6 +49,7 @@ document.getElementById("filter").addEventListener('click', async function () {
         resultsDiv.innerHTML = "<p>Aucun pokémon trouvé</p>";
     } else {
         filtered.forEach(pokemon => {
+
             const pokemonDiv = document.createElement("div");
             pokemonDiv.innerHTML = `
                 <h3>#${pokemon.id} - ${pokemon.name.french}</h3>

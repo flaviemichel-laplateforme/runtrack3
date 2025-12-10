@@ -9,7 +9,8 @@
 
 <body>
 
-    <button id="button" onclick="afficherCitation()">CLIQUEZ</button>
+    <button id="button">CLIQUEZ</button>
+    <p id="citation"></p>
 
     <script src="./script.js"></script>
 </body>

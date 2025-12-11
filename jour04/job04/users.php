@@ -9,7 +9,7 @@ function connect_pdo()
 
         // Tu configures PDO pour qu’il envoie une exception si une erreur SQL survient
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $pdo->setAttibibite(PDO::ATT_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         return $pdo;
         
     } catch (PDOException $e) {
@@ -32,4 +32,6 @@ try {
     echo json_encode($users, JSON_UNESCAPED_UNICODE);
 } catch (PDOException $e) {
     echo json_encode(['error' => 'Erreur SQL : ' . $e->getMessage()]);
+    
 }
+

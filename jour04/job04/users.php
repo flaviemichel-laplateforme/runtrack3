@@ -22,7 +22,7 @@ function connect_pdo()
 try {
     $pdo = connect_pdo();
 
-    $sql = "SELECT id, nom, email FROM utilisateurs";
+    $sql = "SELECT id, nom, prenom, email FROM utilisateurs";
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute();

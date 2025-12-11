@@ -957,7 +957,7 @@ try {
 ?>
 ```
 
-#### script.js (Frontend)
+#### script.js (Frontend) - Méthode 1 : Promises avec .then()
 
 ```javascript
 function updateUsers() {
@@ -1009,6 +1009,155 @@ document.getElementById("update").addEventListener("click", updateUsers);
 document.addEventListener("DOMContentLoaded", updateUsers);
 ```
 
+#### script.js (Frontend) - Méthode 2 : Async/Await (RECOMMANDÉ) ✅
+
+```javascript
+// Fonction asynchrone pour récupérer et afficher les utilisateurs
+async function updateUsers() {
+  console.log("🔄 Mise à jour des utilisateurs...");
+
+  try {
+    // Attendre la réponse du serveur
+    const response = await fetch("users.php");
+
+    // Vérifier si la requête a réussi
+    if (!response.ok) {
+      throw new Error("Erreur HTTP : " + response.status);
+    }
+
+    // Attendre la conversion en JSON
+    const data = await response.json();
+
+    console.log("✅ Données reçues :", data);
+
+    // Vérifier s'il y a une erreur dans la réponse
+    if (data.error) {
+      showMessage("Erreur : " + data.error, "error");
+      return;
+    }
+
+    // Sélectionner le tbody du tableau
+    const tbody = document.querySelector("#users-table tbody");
+
+    // Vider le tableau
+    tbody.innerHTML = "";
+
+    // Vérifier s'il y a des utilisateurs
+    if (data.length === 0) {
+      tbody.innerHTML =
+        '<tr><td colspan="4" style="text-align:center;">Aucun utilisateur trouvé</td></tr>';
+      return;
+    }
+
+    // Parcourir les utilisateurs et créer les lignes
+    data.forEach((user) => {
+      const tr = document.createElement("tr");
+
+      const tdId = document.createElement("td");
+      tdId.textContent = user.id;
+
+      const tdNom = document.createElement("td");
+      tdNom.textContent = user.nom;
+
+      const tdPrenom = document.createElement("td");
+      tdPrenom.textContent = user.prenom;
+
+      const tdEmail = document.createElement("td");
+      tdEmail.textContent = user.email;
+
+      tr.appendChild(tdId);
+      tr.appendChild(tdNom);
+      tr.appendChild(tdPrenom);
+      tr.appendChild(tdEmail);
+
+      tbody.appendChild(tr);
+    });
+
+    showMessage(`✅ ${data.length} utilisateur(s) chargé(s)`, "success");
+  } catch (error) {
+    console.error("❌ Erreur :", error);
+    showMessage("Erreur lors du chargement : " + error.message, "error");
+  }
+}
+
+// Fonction pour afficher un message
+function showMessage(text, type) {
+  const messageDiv = document.getElementById("message");
+  messageDiv.textContent = text;
+  messageDiv.className = type;
+
+  // Effacer le message après 3 secondes
+  setTimeout(() => {
+    messageDiv.textContent = "";
+    messageDiv.className = "";
+  }, 3000);
+}
+
+// Événement : Clic sur le bouton Update
+document.getElementById("update").addEventListener("click", updateUsers);
+
+// Charger les utilisateurs au démarrage de la page
+document.addEventListener("DOMContentLoaded", updateUsers);
+```
+
+**💡 Comparaison Promises vs Async/Await :**
+
+| Aspect               | Promises `.then()`   | Async/Await ✅                      |
+| -------------------- | -------------------- | ----------------------------------- |
+| **Lisibilité**       | ⚠️ Chaînage complexe | ✅ Code linéaire, plus clair        |
+| **Débogage**         | ⚠️ Difficile         | ✅ Facile (comme du code synchrone) |
+| **Gestion d'erreur** | ⚠️ `.catch()` séparé | ✅ `try/catch` standard             |
+| **Conditions**       | ⚠️ Compliqué         | ✅ Simple avec `if/else`            |
+| **Variables**        | ⚠️ Scope limité      | ✅ Variables accessibles partout    |
+| **Modernité**        | ES6 (2015)           | ES2017 (plus récent)                |
+
+**⚠️ Points importants avec Async/Await :**
+
+1. **Le mot-clé `async` est obligatoire** :
+
+```javascript
+// ❌ Erreur
+function maFonction() {
+    const data = await fetch('api.php');  // SyntaxError !
+}
+
+// ✅ Correct
+async function maFonction() {
+    const data = await fetch('api.php');  // OK
+}
+```
+
+2. **Toujours utiliser `try/catch`** :
+
+```javascript
+// ❌ Sans gestion d'erreur
+async function loadData() {
+  const response = await fetch("api.php");
+  const data = await response.json();
+  // Si erreur → crash non géré
+}
+
+// ✅ Avec gestion d'erreur
+async function loadData() {
+  try {
+    const response = await fetch("api.php");
+    const data = await response.json();
+  } catch (error) {
+    console.error("Erreur :", error);
+  }
+}
+```
+
+3. **`await` attend l'exécution** :
+
+```javascript
+async function exemple() {
+  console.log("Début");
+  await fetch("api.php"); // Attend ici
+  console.log("Fin"); // S'exécute après
+}
+```
+
 ---
 
 ## 6. Concepts avancés
@@ -1017,26 +1166,87 @@ document.addEventListener("DOMContentLoaded", updateUsers);
 
 JavaScript est **mono-thread** mais peut faire des opérations **asynchrones**.
 
-#### Callbacks
+#### 📚 Les 3 façons de gérer l'asynchrone
+
+##### 1. Callbacks (ancienne méthode)
 
 ```javascript
+// Exécuter du code après 1 seconde
 setTimeout(function () {
   console.log("Après 1 seconde");
 }, 1000);
+
+// Callback Hell (à éviter !)
+getData(function (a) {
+  getMoreData(a, function (b) {
+    getEvenMoreData(b, function (c) {
+      console.log(c); // Pyramide de callbacks = illisible
+    });
+  });
+});
 ```
 
-#### Promises
+**Problèmes :**
+
+- ❌ Code difficile à lire ("Callback Hell")
+- ❌ Gestion d'erreur complexe
+- ❌ Difficilement maintenable
+
+---
+
+##### 2. Promises (ES6 - 2015)
 
 ```javascript
+// Syntaxe Promise
 fetch("users.php")
   .then((response) => response.json())
   .then((data) => console.log(data))
   .catch((error) => console.error(error));
+
+// Chaînage de Promises
+fetch("users.php")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Erreur HTTP");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+    return fetch("details.php?id=" + data[0].id);
+  })
+  .then((response) => response.json())
+  .then((details) => {
+    console.log(details);
+  })
+  .catch((error) => {
+    console.error("Erreur :", error);
+  });
 ```
 
-#### Async/Await (moderne)
+**États d'une Promise :**
+
+- **Pending** (en attente) → La promesse n'est pas encore résolue
+- **Fulfilled** (résolue) → L'opération a réussi
+- **Rejected** (rejetée) → L'opération a échoué
+
+**Avantages :**
+
+- ✅ Meilleur que les callbacks
+- ✅ Gestion d'erreur avec `.catch()`
+- ✅ Chaînage possible
+
+**Inconvénients :**
+
+- ⚠️ Chaînage peut devenir complexe
+- ⚠️ Moins lisible que async/await
+
+---
+
+##### 3. Async/Await (ES2017 - RECOMMANDÉ ✅)
 
 ```javascript
+// Syntaxe Async/Await (plus moderne et lisible)
 async function loadUsers() {
   try {
     const response = await fetch("users.php");
@@ -1046,7 +1256,108 @@ async function loadUsers() {
     console.error(error);
   }
 }
+
+// Exemple avec conditions (plus clair qu'avec .then())
+async function loadDataWithConditions() {
+  try {
+    const response = await fetch("users.php");
+
+    if (!response.ok) {
+      throw new Error("Erreur HTTP");
+    }
+
+    const data = await response.json();
+
+    if (data.length > 0) {
+      // Charger les détails du premier utilisateur
+      const detailsResponse = await fetch("details.php?id=" + data[0].id);
+      const details = await detailsResponse.json();
+      console.log(details);
+    } else {
+      console.log("Aucun utilisateur trouvé");
+    }
+  } catch (error) {
+    console.error("Erreur :", error);
+  }
+}
 ```
+
+**Avantages :**
+
+- ✅ Code linéaire et lisible (comme du code synchrone)
+- ✅ Gestion d'erreur avec `try/catch` standard
+- ✅ Facile à déboguer
+- ✅ Variables accessibles dans toute la fonction
+- ✅ Conditions et boucles simples
+- ✅ **Syntaxe recommandée aujourd'hui**
+
+**Règles importantes :**
+
+1. `await` ne fonctionne que dans une fonction `async`
+2. Toujours utiliser `try/catch` pour gérer les erreurs
+3. `await` met en pause l'exécution jusqu'à résolution de la Promise
+
+---
+
+#### 🔄 Exemple complet comparatif
+
+**Même opération avec les 3 méthodes :**
+
+```javascript
+// 1. Avec Callbacks (ancienne méthode)
+function loadWithCallbacks() {
+  fetch("users.php", function (response) {
+    response.json(function (data) {
+      if (data.length > 0) {
+        fetch("details.php?id=" + data[0].id, function (detailsResponse) {
+          detailsResponse.json(function (details) {
+            console.log(details);
+          });
+        });
+      }
+    });
+  });
+}
+
+// 2. Avec Promises (.then)
+function loadWithPromises() {
+  fetch("users.php")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.length > 0) {
+        return fetch("details.php?id=" + data[0].id);
+      }
+      throw new Error("Aucun utilisateur");
+    })
+    .then((response) => response.json())
+    .then((details) => {
+      console.log(details);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+// 3. Avec Async/Await (moderne - RECOMMANDÉ)
+async function loadWithAsyncAwait() {
+  try {
+    const response = await fetch("users.php");
+    const data = await response.json();
+
+    if (data.length > 0) {
+      const detailsResponse = await fetch("details.php?id=" + data[0].id);
+      const details = await detailsResponse.json();
+      console.log(details);
+    } else {
+      throw new Error("Aucun utilisateur");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+```
+
+👉 **La version Async/Await est beaucoup plus claire et facile à comprendre !**
 
 ---
 

@@ -1,57 +1,69 @@
 // Fonction pour récupérer et afficher les utilisateurs
-function updateUsers() {
+async function updateUsers() {
     console.log("🔄 Mise à jour des utilisateurs...");
 
-    // Récupérer les données depuis users.php
-    fetch('users.php')
-        .then(response => {
-            // Vérifier si la requête a réussi
-            if (!response.ok) {
-                throw new Error('Erreur HTTP : ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("✅ Données reçues :", data);
+    try {
+        // Attendre la réponse du serveur
+        const response = await fetch('users.php');
 
-            // Vérifier s'il y a une erreur dans la réponse
-            if (data.error) {
-                showMessage('Erreur : ' + data.error, 'error');
-                return;
-            }
+        // Vérifier si la requête a réussi
+        if (!response.ok) {
+            throw new Error('Erreur HTTP : ' + response.status);
+        }
 
-            // Sélectionner le tbody du tableau
-            const tbody = document.querySelector('#users-table tbody');
+        // Attendre la conversion en JSON
+        const data = await response.json();
 
-            // Vider le tableau
-            tbody.innerHTML = '';
+        console.log("✅ Données reçues :", data);
 
-            // Vérifier s'il y a des utilisateurs
-            if (data.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Aucun utilisateur trouvé</td></tr>';
-                return;
-            }
+        // Vérifier s'il y a une erreur dans la réponse
+        if (data.error) {
+            showMessage('Erreur : ' + data.error, 'error');
+            return;
+        }
 
-            // Parcourir les utilisateurs et créer les lignes
-            data.forEach(user => {
-                const tr = document.createElement('tr');
+        // Sélectionner le tbody du tableau
+        const tbody = document.querySelector('#users-table tbody');
 
-                tr.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.nom}</td>
-                    <td>${user.prenom}</td>
-                    <td>${user.email}</td>
-                `;
+        // Vider le tableau
+        tbody.innerHTML = '';
 
-                tbody.appendChild(tr);
-            });
+        // Vérifier s'il y a des utilisateurs
+        if (data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Aucun utilisateur trouvé</td></tr>';
+            return;
+        }
 
-            showMessage(`✅ ${data.length} utilisateur(s) chargé(s)`, 'success');
-        })
-        .catch(error => {
-            console.error("❌ Erreur :", error);
-            showMessage('Erreur lors du chargement : ' + error.message, 'error');
+        // Parcourir les utilisateurs et créer les lignes
+        data.forEach(user => {
+            const tr = document.createElement('tr');
+
+            const tdId = document.createElement('td');
+            tdId.textContent = user.id;
+
+            const tdNom = document.createElement('td');
+            tdNom.textContent = user.nom;
+
+            const tdPrenom = document.createElement('td');
+            tdPrenom.textContent = user.prenom;
+
+            const tdEmail = document.createElement('td');
+            tdEmail.textContent = user.email;
+
+            tr.appendChild(tdId);
+            tr.appendChild(tdNom);
+            tr.appendChild(tdPrenom);
+            tr.appendChild(tdEmail);
+
+            tbody.appendChild(tr);
         });
+
+        showMessage(`✅ ${data.length} utilisateur(s) chargé(s)`, 'success');
+
+    } catch (error) {
+        console.error("❌ Erreur :", error);
+        showMessage('Erreur lors du chargement : ' + error.message, 'error');
+    }
 }
 
 // Fonction pour afficher un message

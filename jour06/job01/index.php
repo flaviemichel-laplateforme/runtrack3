@@ -193,76 +193,12 @@
         </div>
 
     </form>
-    <!-- <section class="row g-3 m-3 ">
-      <div class="col-md-6">
-        <div class="input-group mb-3 ">
-          <span class="input-group-text" id="basic-addon1">@</span>
-          <input type="text" class="form-control" placeholder="Login" aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Mot de passe" aria-label="Recipient’s username" aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2">@example.com</span>
-        </div>
-        <div class="form-text" id="basic-addon4">URL des internets 2 et 2.1 Beta</div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">DogeCoin</span>
-          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-          <span class="input-group-text">.00</span>
-        </div>
-
-        <div class="mb-3">
-
-          <div class="input-group">
-            <span class="input-group-text" id="basic-addon3">https://133t.lptf/dkwb/berlusconimkt/</span>
-            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="col-md-3">
-        <form class="row g-3 ">
-          <div class="col-12">
-            <label for="inputEmail4" class="form-label fw-medium">Email address</label>
-            <input type="email" class="form-control" id="inputEmail4">
-            <p class="fs-6 fw-light">We'll never share your email with anyone else.</p>
-          </div>
-          <div class="col-12">
-            <label for="inputPassword4" class="form-label fw-medium">Password</label>
-            <input type="password" class="form-control" id="inputPassword4">
-          </div>
-
-          <div class="col-12">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck">
-              <label class="form-check-label" for="gridCheck">
-                Check me out
-              </label>
-            </div>
-          </div>
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
-      </div>
-    </section> -->
 
 
 
   </main>
 
-  <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-    </ul>
-    <p class="text-center text-body-secondary">© 2025 Company, Inc</p>
-  </footer>
+
 
   <!-- Link scrip bootstrap -->
   <script src="./assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

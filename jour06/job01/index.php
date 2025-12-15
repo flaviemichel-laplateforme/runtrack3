@@ -34,64 +34,85 @@
                 </div>
             </div>
         </nav>
+
     </header>
-    <main class="container-fluid">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                    <div class="carousel-item active">
-                    <img src="https://placehold.co/450x300" class="d-block w-75" alt="...">
+
+    <main class="container-fluid bg-secondary ">
+        
+       <h1 class="display-3 text-center">LaPlateforme_</h1>
+
+            <section class="row gap-1 m-3 ">
+
+                <article class="row gap-3 .mx-auto display: block with: 100%">
+                    <div class="card" style="width: 15%;">
+                        <img src="./assets\img\papillon.jpg" class="card-img-top" alt="Papillon">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Un Papillon</h5>
+                            <p class="card-text">Un papillon, c'est un peu comme une chenille, mais avec des ailes.<br>
+                            Ne pas ingérer.
+                             </p>
+                            <a href="#" class="btn btn-primary">Commander votre propre papillon</a>
+                        </div>
                     </div>
-                    <div class="carousel-item">
-                    <img src="https://placehold.co/300x200" class="d-block w-75" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                    <img src="https://placehold.co/150x100" class="d-block w-75" alt="...">
-                    </div>
+
+                     <div class="card" style="width: 70%;">
+            
+                     <div class="card-body">
+                        <h5 class="card-title display-3 mt-4">Bonjour, monde!</h5>
+                         <p class="card-text lh-1.8 fs-4">Il existe plusieurs visions du terme:<br>
+                            le monde est la matière,l'espace et les phénomènes qui nous sont accécibles par les sens,l'expérience ou la raison.<br>
+                            Le sens le plus courant désigne notre planète. La terre,avec ses habitants, et son envoronnemnt plus ou moins naturel.</p>
+                    <hr>
+                        <p>Le sens étendu désigne l'univers dans son ensemble.</p>
+                      
+                       <a href="#" class="btn btn-danger">Rebooter le Monde</a>
+                        
+                    <div class="spinner-border ms-auto" aria-hidden="true"></div>
                 </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-        </div>
-        <h1>Bonjour Bootstrap !</h1>
-        <p>Mon premier site avec Bootstrap</p>
-        <button class="btn btn-primary">Mon bouton</button>
 
-    <section class="row gap-1 m-2">
 
-        <article class="row gap-3">
-          <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                        <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
                 </div>
             </div>
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+            <div class="card" style="width: 10%;">
+            <ul class="list-group">
+  <li class="list-group-item active" aria-current="true">Limbes</li>
+  <li class="list-group-item">Luxure</li>
+  <li class="list-group-item">Gourmandise</li>
+  <li class="list-group-item">Avarice</li>
+  <li class="list-group-item">Colère</li>
+  <li class="list-group-item">Heresie</li>
+  <li class="list-group-item">Violence</li>
+  <li class="list-group-item">Ruse et Tromperie</li>
+  <li class="list-group-item">Trahison</li>
+  <li class="list-group-item">Internet </li>
+</ul>
+</div>
             </div>
         </article>
 
     </section>
-
+<div class="progress w-50 mx-auto" role="progressbar" aria-label="Warning example" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar bg-warning" style="width: 90%"></div>
+</div>
     </main>
 
     <footer class="py-3 my-4"> 

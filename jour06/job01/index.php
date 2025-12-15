@@ -134,9 +134,67 @@
 
     </div>
     </div>
+    <p class="m-5"><strong>Recevez votre copie gratuite d'internet 2!</strong></p>
 
-    <section class="row g-3 m-3 ">
-      <div class="col-md-6 ">
+    <form action="" class="m-5">
+
+      <div class="row mx-5">
+        <div class="col">
+          <div class="input-group mb-3 w-50">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input type="text" class="form-control" placeholder="Login" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3 w-50">
+            <input type="password" class="form-control" placeholder="Mot de Passe" aria-label="password" aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2">@example.com</span>
+          </div>
+          <label for="" class="form-label ms-1">URL des Internets 2 et 2.1 Beta</label>
+          <div class="input-group mb-3 w-50">
+            <span class="input-group-text">DogeCoin</span>
+            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+            <span class="input-group-text">.00</span>
+          </div>
+          <div class="mb-3 w-50">
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon3">https://l33t.lptf/dkwb/berlusconimkt/</span>
+              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+            <div class="form-text" id="basic-addon4"></div>
+          </div>
+        </div>
+
+
+        <div class="col-3 ms-auto">
+          <div class="row g-2">
+            <div class="col-12">
+              <label for="inputEmail4" class="form-label fw-medium">Email address</label>
+              <input type="email" class="form-control" id="inputEmail4">
+              <p class="fs-6 fw-light mb-2">We'll never share your email with anyone else.</p>
+            </div>
+            <div class="col-12">
+              <label for="inputPassword4" class="form-label fw-medium">Password</label>
+              <input type="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-12">
+
+            </div>
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                <label class="form-check-label" for="inlineFormCheck">
+                  Check me out
+                </label>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+
+    </form>
+    <!-- <section class="row g-3 m-3 ">
+      <div class="col-md-6">
         <div class="input-group mb-3 ">
           <span class="input-group-text" id="basic-addon1">@</span>
           <input type="text" class="form-control" placeholder="Login" aria-label="Username" aria-describedby="basic-addon1">
@@ -189,7 +247,7 @@
           </div>
         </form>
       </div>
-    </section>
+    </section> -->
 
 
 

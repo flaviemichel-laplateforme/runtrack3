@@ -134,12 +134,12 @@
 
     </div>
     </div>
-    <p class="m-5"><strong>Recevez votre copie gratuite d'internet 2!</strong></p>
+
 
     <form action="" class="m-5">
-
       <div class="row mx-5">
         <div class="col">
+          <p class="mb-3 fs-4">Recevez votre copie gratuite d'internet 2!</p>
           <div class="input-group mb-3 w-50">
             <span class="input-group-text" id="basic-addon1">@</span>
             <input type="text" class="form-control" placeholder="Login" aria-label="Username" aria-describedby="basic-addon1">

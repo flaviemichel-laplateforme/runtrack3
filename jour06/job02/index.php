@@ -44,7 +44,7 @@
 
   </header>
 
-  <main class="container-fluid bg-secondary-subtle mb-5">
+  <main class="container-fluid bg-secondary-subtle">
 
     <h1 class="display-3 text-center">LaPlateforme_</h1>
 

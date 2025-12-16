@@ -62,22 +62,19 @@
           </div>
         </div>
 
-        <div class="card" style="width: 70%;">
-
-          <div class="card-body">
-            <h5 class="card-title display-3 mt-4">Bonjour, monde!</h5>
-            <p class="card-text lh-1.8 fs-4">Il existe plusieurs visions du terme:<br>
-              le monde est la matière,l'espace et les phénomènes qui nous sont accécibles par les sens,l'expérience ou la raison.<br>
+        <div class="bg-light p-5 rounded-3" style="width: 70%;">
+          <div class="container-fluid py-3">
+            <h1 class="display-3" id="jumbotronTitle">Bonjour, monde!</h1>
+            <p class="fs-4" id="jumbotronText">Il existe plusieurs visions du terme:<br>
+              le monde est la matière, l'espace et les phénomènes qui nous sont accessibles par les sens, l'expérience ou la raison.<br>
               Le sens le plus courant désigne notre planète. La terre, avec ses habitants, et son environnement plus ou moins naturel.</p>
-            <hr>
-            <p>Le sens étendu désigne l'univers dans son ensemble.</p>
+            <hr class="my-4">
+            <p class="lead" id="jumbotronLead">Le sens étendu désigne l'univers dans son ensemble.</p>
 
-            <a href="#" class="btn btn-danger">Rebooter le Monde</a>
+            <a href="#" class="btn btn-danger btn-lg">Rebooter le Monde</a>
 
-            <div class="spinner-border ms-auto" aria-hidden="true"></div>
+            <div class="spinner-border ms-3" role="status" aria-hidden="true"></div>
           </div>
-
-
 
           <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-end">
@@ -86,9 +83,11 @@
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#" data-page="1">1</a></li>
+              <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
+              <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
+              <li class="page-item"><a class="page-link" href="#" data-page="4">4</a></li>
+              <li class="page-item"><a class="page-link" href="#" data-page="5">5</a></li>
               <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>

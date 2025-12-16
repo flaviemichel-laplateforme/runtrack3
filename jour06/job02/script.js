@@ -114,3 +114,111 @@ document.querySelectorAll('[data-page]').forEach(link => {
         }
     });
 });
+
+// Gestion de la barre de progression
+const progressBar = document.getElementById('progressBar');
+const btnProgresser = document.getElementById('btnProgresser');
+const btnRegresser = document.getElementById('btnRegresser');
+
+let progression = 90; // Valeur initiale
+
+// Augmenter la progression
+btnProgresser.addEventListener('click', () => {
+    if (progression < 100) {
+        progression += 10;
+        if (progression > 100) progression = 100;
+        progressBar.style.width = progression + '%';
+        progressBar.parentElement.setAttribute('aria-valuenow', progression);
+    }
+});
+
+// Diminuer la progression
+btnRegresser.addEventListener('click', () => {
+    if (progression > 0) {
+        progression -= 10;
+        if (progression < 0) progression = 0;
+        progressBar.style.width = progression + '%';
+        progressBar.parentElement.setAttribute('aria-valuenow', progression);
+    }
+});
+
+// Détection de la séquence de touches D, G, C
+let sequence = [];
+const secretCode = ['d', 'g', 'c'];
+
+document.addEventListener('keydown', (e) => {
+    // Ajouter la touche pressée à la séquence
+    sequence.push(e.key.toLowerCase());
+
+    // Garder seulement les 3 dernières touches
+    if (sequence.length > 3) {
+        sequence.shift(); // Retire le premier élément
+    }
+
+    // Vérifier si la séquence correspond
+    if (JSON.stringify(sequence) === JSON.stringify(secretCode)) {
+        // Récupérer les valeurs du formulaire
+        const email = document.getElementById('inputEmail4').value;
+        const password = document.getElementById('inputPassword4').value;
+        const login = document.querySelector('input[placeholder="Login"]').value;
+        const motDePasse = document.querySelector('input[placeholder="Mot de Passe"]').value;
+        const url = document.getElementById('basic-url').value;
+        const checkBox = document.getElementById('inlineFormCheck').checked;
+
+        // Créer le contenu du récapitulatif
+        const recapHTML = `
+            <p><strong>Login:</strong> ${login || 'Non renseigné'}</p>
+            <p><strong>Mot de passe:</strong> ${motDePasse ? '****' : 'Non renseigné'}</p>
+            <p><strong>Email:</strong> ${email || 'Non renseigné'}</p>
+            <p><strong>Password (droite):</strong> ${password ? '****' : 'Non renseigné'}</p>
+            <p><strong>URL:</strong> ${url || 'Non renseignée'}</p>
+            <p><strong>Check me out:</strong> ${checkBox ? 'Coché' : 'Non coché'}</p>
+        `;
+
+        // Insérer dans la modale
+        document.getElementById('recapitulatif').innerHTML = recapHTML;
+
+        // Afficher la modale
+        const modal = new bootstrap.Modal(document.getElementById('formulaireModal'));
+        modal.show();
+
+        // Réinitialiser la séquence
+        sequence = [];
+    }
+
+    // Validation du formulaire et changement de couleur du spinner
+    const form = document.querySelector('form');
+    const spinner = document.querySelector('.spinner-border');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Empêcher l'envoi du formulaire
+
+        const email = document.getElementById('inputEmail4').value;
+        const password = document.getElementById('inputPassword4').value;
+
+        // Vérifier que l'email et le mot de passe ne sont pas vides
+        if (email.trim() !== '' && password.trim() !== '') {
+            // Couleurs Bootstrap disponibles pour le spinner
+            const couleurs = [
+                'text-primary',
+                'text-secondary',
+                'text-success',
+                'text-danger',
+                'text-warning',
+                'text-info',
+                'text-dark'
+            ];
+
+            // Retirer toutes les classes de couleur existantes
+            couleurs.forEach(couleur => spinner.classList.remove(couleur));
+
+            // Choisir une couleur aléatoire
+            const couleurAleatoire = couleurs[Math.floor(Math.random() * couleurs.length)];
+
+            // Appliquer la nouvelle couleur
+            spinner.classList.add(couleurAleatoire);
+        } else {
+            alert('Veuillez remplir l\'email et le mot de passe');
+        }
+    });
+});

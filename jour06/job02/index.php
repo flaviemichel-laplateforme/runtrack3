@@ -119,15 +119,15 @@
     <div class="w-50 mx-auto">
       <p class="text-end mb-2">Installation de AI 9000</p>
       <div class="d-flex align-items-center gap-2">
-        <i class="bi bi-arrow-bar-left"></i>
+        <i class="bi bi-arrow-bar-left" id="btnRegresser" style="cursor: pointer; font-size: 1.5rem;"></i>
 
         <!-- <div class="progress flex-grow-1" role="progressbar" aria-label="Warning example" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
           <div class="progress-bar bg-warning" style="width: 90%"></div> -->
 
         <div class="progress flex-grow-1" role="progressbar" aria-label="Animated striped example" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" style="width: 90%"></div>
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="progressBar" style="width: 90%"></div>
 
-        </div> <i class="bi bi-arrow-bar-right"></i>
+        </div> <i class="bi bi-arrow-bar-right" id="btnProgresser" style="cursor: pointer; font-size: 1.5rem;"></i>
       </div>
 
     </div>
@@ -211,6 +211,27 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modale pour les informations du formulaire -->
+<div class="modal" id="formulaireModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Récapitulatif du formulaire</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="recapitulatif">
+        <!-- Le contenu sera inséré par JavaScript -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <!-- Link scrip bootstrap -->
   <script src="./assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
    <script src="./script.js"></script>

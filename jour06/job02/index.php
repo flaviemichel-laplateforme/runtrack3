@@ -58,7 +58,7 @@
             <p class="card-text">Un papillon, c'est un peu comme une chenille, mais avec des ailes.<br>
               Ne pas ingérer.
             </p>
-            <a href="#" id="btnPapillon"class="btn btn-primary">Commander votre propre papillon</a>
+            <a href="#" id="btnPapillon" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#papillonModal">Commander votre propre papillon</a>
           </div>
         </div>
 
@@ -195,7 +195,23 @@
   </main>
 
 
-
+<div class="modal" id="papillonModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Commande de papillon</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûr de vouloir commander un papillon ? Attention, ne pas ingérer !</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary">Commander</button>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Link scrip bootstrap -->
   <script src="./assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
    <script src="./script.js"></script>

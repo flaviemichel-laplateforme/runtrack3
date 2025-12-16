@@ -2,3 +2,4 @@
 // l’achat d’un papillon.
 
 const btnPapillon = document.getElementById('btnPapillon');
+

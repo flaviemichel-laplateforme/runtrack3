@@ -16,14 +16,13 @@
   <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">LPTF</a>
+              <a class="nav-link active" aria-current="page" href="https://laplateforme.io/">LPTF</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Accueil</a>
@@ -59,7 +58,7 @@
             <p class="card-text">Un papillon, c'est un peu comme une chenille, mais avec des ailes.<br>
               Ne pas ingérer.
             </p>
-            <a href="#" class="btn btn-primary">Commander votre propre papillon</a>
+            <a href="#" id="btnPapillon"class="btn btn-primary">Commander votre propre papillon</a>
           </div>
         </div>
 
@@ -199,6 +198,7 @@
 
   <!-- Link scrip bootstrap -->
   <script src="./assets/bootstrap-5.3.8/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+   <script src="./script.js"></script>
 </body>
 
 </html>

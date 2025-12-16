@@ -13,12 +13,129 @@
 
   <body>
     <header>
-      
+      <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class="brown-text text-lighten-4" href="index.php">Accueil</a></li>
+              <li><a class="brown-text text-lighten-4" href="index.php">Inscription</a></li>
+              <li><a class="brown-text text-lighten-4" href="index.php">Connexion</a></li>
+              <li><a class="brown-text text-lighten-4" href="index.php">Rechercher</a></li>
+      </ul>
+    </div>
+  </nav>
     </header>
 
     <main>
-      
-      
+      <section class="container">
+        <div class="row">
+          <form class="col s12" action="#" method="POST">
+            
+            <!-- Civilité -->
+            <div class="row">
+              <div class="col s12">
+                <p><label>Civilité</label></p>
+                <p>
+                  <label>
+                    <input name="civilite" type="radio" value="mme" checked />
+                    <span>Mme</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="civilite" type="radio" value="mr" />
+                    <span>Mr</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input class="with-gap" name="civilite" type="radio" value="mll" />
+                    <span>Mll</span>
+                  </label>
+                </p>
+              </div>
+            </div>
+
+            <!-- Prénom et Nom -->
+            <div class="row">
+              <div class="input-field col s12 m6">
+                <input placeholder="Prénom" id="first_name" type="text" class="validate" name="prenom">
+                <label for="first_name">Prénom</label>
+              </div>
+              <div class="input-field col s12 m6">
+                <input id="last_name" type="text" class="validate" name="nom">
+                <label for="last_name">Nom</label>
+              </div>
+            </div>
+
+            <!-- Adresse -->
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Adresse" id="adresse" type="text" class="validate" name="adresse">
+                <label for="adresse">Adresse</label>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="email" type="email" class="validate" name="email">
+                <label for="email">Email</label>
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="password" type="password" class="validate" name="password">
+                <label for="password">Password</label>
+              </div>
+            </div>
+
+            <!-- Passions -->
+            <div class="row">
+              <div class="col s12">
+                <p><label>Sélectionner vos passions !!</label></p>
+                <p>
+                  <label>
+                    <input type="checkbox" name="passions[]" value="informatique" />
+                    <span>Informatique</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input type="checkbox" name="passions[]" value="voyages" checked="checked" />
+                    <span>Voyages</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input type="checkbox" name="passions[]" value="sport" checked="checked" />
+                    <span>Sport</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input type="checkbox" name="passions[]" value="lecture" />
+                    <span>Lecture</span>
+                  </label>
+                </p>
+              </div>
+            </div>
+
+            <!-- Bouton Submit -->
+            <div class="row">
+              <div class="col s12">
+                <button class="btn waves-effect waves-light brown" type="submit" name="action">
+                  Submit
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </section>
     </main>
 
     <!-- ===== FOOTER : Pied de page avec infos et liens ===== -->

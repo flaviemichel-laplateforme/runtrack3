@@ -68,7 +68,7 @@
             <h5 class="card-title display-3 mt-4">Bonjour, monde!</h5>
             <p class="card-text lh-1.8 fs-4">Il existe plusieurs visions du terme:<br>
               le monde est la matière,l'espace et les phénomènes qui nous sont accécibles par les sens,l'expérience ou la raison.<br>
-              Le sens le plus courant désigne notre planète. La terre,avec ses habitants, et son envoronnemnt plus ou moins naturel.</p>
+              Le sens le plus courant désigne notre planète. La terre, avec ses habitants, et son environnement plus ou moins naturel.</p>
             <hr>
             <p>Le sens étendu désigne l'univers dans son ensemble.</p>
 

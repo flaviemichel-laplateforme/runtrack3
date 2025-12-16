@@ -9,6 +9,7 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
@@ -33,8 +34,8 @@
             
             <!-- Civilité -->
             <div class="row">
-              <div class="col s12">
-                <p><label>Civilité</label></p>
+              <div class="col s12 ">
+                <p><label><i class="material-icons">person</i> Civilité</label></p>
                 <p>
                   <label>
                     <input name="civilite" type="radio" value="mme" checked />
@@ -60,11 +61,11 @@
             <div class="row">
               <div class="input-field col s12 m6">
                 <input placeholder="Prénom" id="first_name" type="text" class="validate" name="prenom">
-                <label for="first_name">Prénom</label>
+                <label for="first_name"><i class="material-icons">person</i>Prénom</label>
               </div>
               <div class="input-field col s12 m6">
                 <input id="last_name" type="text" class="validate" name="nom">
-                <label for="last_name">Nom</label>
+                <label for="last_name"><i class="material-icons">person_city</i>Nom</label>
               </div>
             </div>
 
@@ -72,7 +73,7 @@
             <div class="row">
               <div class="input-field col s12">
                 <input placeholder="Adresse" id="adresse" type="text" class="validate" name="adresse">
-                <label for="adresse">Adresse</label>
+                <label for="adresse"><i class="material-icons">location_city</i>Adresse</label>
               </div>
             </div>
 
@@ -80,7 +81,7 @@
             <div class="row">
               <div class="input-field col s12">
                 <input id="email" type="email" class="validate" name="email">
-                <label for="email">Email</label>
+                <label for="email"><i class="material-icons">email_city</i>Email</label>
               </div>
             </div>
 
@@ -88,7 +89,7 @@
             <div class="row">
               <div class="input-field col s12">
                 <input id="password" type="password" class="validate" name="password">
-                <label for="password">Password</label>
+                <label for="password"><i class="material-icons">vpn_key_city</i>Password</label>
               </div>
             </div>
 

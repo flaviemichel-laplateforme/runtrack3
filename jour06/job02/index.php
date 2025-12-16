@@ -98,17 +98,17 @@
         </div>
         </div>
         <div class="card" style="width: 10%;">
-          <ul class="list-group">
-            <li class="list-group-item active" aria-current="true">Limbes</li>
-            <li class="list-group-item">Luxure</li>
-            <li class="list-group-item">Gourmandise</li>
-            <li class="list-group-item">Avarice</li>
-            <li class="list-group-item">Colère</li>
-            <li class="list-group-item">Heresie</li>
-            <li class="list-group-item">Violence</li>
-            <li class="list-group-item">Ruse et Tromperie</li>
-            <li class="list-group-item">Trahison</li>
-            <li class="list-group-item">Internet </li>
+          <ul class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action active" aria-current="true" data-cercle="1">Limbes</a>
+            <a href="#" class="list-group-item list-group-item-action" data-cercle="2">Luxure</a>
+            <a href="#" class="list-group-item list-group-item-action" data-cercle="3">Gourmandise</a>
+            <a href="#" class="list-group-item list-group-item-action" data-cercle="4">Avarice</a>
+            <a href="#" class="list-group-item list-group-item-action" data-cercle="5">Colère</a>
+            <a href="#" class="list-group-item list-group-item-action" data-cercle="6">Heresie</a>
+            <a href="#" class="list-group-item list-group-item-action" data-cercle="7">Violence</a>
+            <a href="#" class="list-group-item list-group-item-action" data-cercle="8">Ruse et Tromperie</a>
+            <a href="#" class="list-group-item list-group-item-action" data-cercle="9">Trahison</a>
+            <a href="#" class="list-group-item list-group-item-action" data-cercle="10">Internet</a>
           </ul>
         </div>
         </div>

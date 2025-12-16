@@ -95,14 +95,22 @@ document.querySelectorAll('[data-page]').forEach(link => {
         document.getElementById('jumbotronText').textContent = content.text;
         document.getElementById('jumbotronLead').textContent = content.lead;
 
-        // Optionnel : marquer la page active
+        // Marquer la page active dans la pagination
         document.querySelectorAll('.page-item').forEach(item => {
             item.classList.remove('active');
         });
         e.target.parentElement.classList.add('active');
 
+        // Activer l'élément correspondant dans la liste avec couleur primary
+        document.querySelectorAll('[data-cercle]').forEach(item => {
+            item.classList.remove('active', 'list-group-item-primary', 'text-white');
+            item.removeAttribute('aria-current');
+        });
+
+        const cercleActif = document.querySelector(`[data-cercle="${pageNum}"]`);
+        if (cercleActif) {
+            cercleActif.classList.add('active', 'list-group-item-primary');
+            cercleActif.setAttribute('aria-current', 'true');
+        }
     });
-
-
-
-})
+});

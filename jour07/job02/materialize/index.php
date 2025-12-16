@@ -14,9 +14,9 @@
   <body>
     <header>
       <nav>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper light-green lighten-1">
       <a href="#" class="brand-logo">Logo</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul id="nav-mobile" class="right hide-on-med-and-down brown lighten-1">
         <li><a class="brown-text text-lighten-4" href="index.php">Accueil</a></li>
               <li><a class="brown-text text-lighten-4" href="index.php">Inscription</a></li>
               <li><a class="brown-text text-lighten-4" href="index.php">Connexion</a></li>

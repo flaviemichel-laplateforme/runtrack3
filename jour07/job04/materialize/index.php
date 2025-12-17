@@ -61,7 +61,7 @@
             <div class="row">
               <div class="input-field col s12 m6">
                 <input placeholder="Prénom" id="first_name" type="text" class="validate" name="prenom">
-                <label for="first_name"><i class="material-icons">person</i>Prénom</label>
+                <label for="first_name"><i class="material-icons">person_city</i>Prénom</label>
               </div>
               <div class="input-field col s12 m6">
                 <input id="last_name" type="text" class="validate" name="nom">

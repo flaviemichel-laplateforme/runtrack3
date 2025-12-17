@@ -1,5 +1,5 @@
-// Validation asynchrone du formulaire d'inscription
-document.addEventListener('DOMContentLoaded', function () {
+// Validation asynchrone du formulaire d'inscription - Version moderne avec async/await
+document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('inscriptionForm');
     const inputs = {
         nom: document.getElementById('nom'),
@@ -13,148 +13,193 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Délai pour la validation asynchrone
     const VALIDATION_DELAY = 500;
+    const DEBOUNCE_DELAY = 300;
 
     // Timers pour debounce
     const timers = {};
 
     // ========== Fonctions de validation asynchrones ==========
 
-    function validateNom(nom) {
+    const validateNom = async (nom) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
+                try {
+                    const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
 
-                if (!nom) {
-                    resolve({ valid: false, message: 'Le nom est requis' });
-                } else if (nom.length < 2) {
-                    resolve({ valid: false, message: 'Le nom doit contenir au moins 2 caractères' });
-                } else if (nom.length > 50) {
-                    resolve({ valid: false, message: 'Le nom est trop long (max 50 caractères)' });
-                } else if (!nameRegex.test(nom)) {
-                    resolve({ valid: false, message: 'Le nom contient des caractères invalides' });
-                } else {
+                    if (!nom) {
+                        throw new Error('Le nom est requis');
+                    }
+                    if (nom.length < 2) {
+                        throw new Error('Le nom doit contenir au moins 2 caractères');
+                    }
+                    if (nom.length > 50) {
+                        throw new Error('Le nom est trop long (max 50 caractères)');
+                    }
+                    if (!nameRegex.test(nom)) {
+                        throw new Error('Le nom contient des caractères invalides');
+                    }
+
                     resolve({ valid: true, message: '' });
+                } catch (error) {
+                    resolve({ valid: false, message: error.message });
                 }
             }, VALIDATION_DELAY);
         });
-    }
+    };
 
-    function validatePrenom(prenom) {
+    const validatePrenom = async (prenom) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
+                try {
+                    const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
 
-                if (!prenom) {
-                    resolve({ valid: false, message: 'Le prénom est requis' });
-                } else if (prenom.length < 2) {
-                    resolve({ valid: false, message: 'Le prénom doit contenir au moins 2 caractères' });
-                } else if (prenom.length > 50) {
-                    resolve({ valid: false, message: 'Le prénom est trop long (max 50 caractères)' });
-                } else if (!nameRegex.test(prenom)) {
-                    resolve({ valid: false, message: 'Le prénom contient des caractères invalides' });
-                } else {
+                    if (!prenom) {
+                        throw new Error('Le prénom est requis');
+                    }
+                    if (prenom.length < 2) {
+                        throw new Error('Le prénom doit contenir au moins 2 caractères');
+                    }
+                    if (prenom.length > 50) {
+                        throw new Error('Le prénom est trop long (max 50 caractères)');
+                    }
+                    if (!nameRegex.test(prenom)) {
+                        throw new Error('Le prénom contient des caractères invalides');
+                    }
+
                     resolve({ valid: true, message: '' });
+                } catch (error) {
+                    resolve({ valid: false, message: error.message });
                 }
             }, VALIDATION_DELAY);
         });
-    }
+    };
 
-    function validateEmail(email) {
+    const validateEmail = async (email) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                try {
+                    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-                if (!email) {
-                    resolve({ valid: false, message: 'L\'email est requis' });
-                } else if (!emailRegex.test(email)) {
-                    resolve({ valid: false, message: 'Format d\'email invalide' });
-                } else if (email.length > 255) {
-                    resolve({ valid: false, message: 'L\'email est trop long (max 255 caractères)' });
-                } else {
+                    if (!email) {
+                        throw new Error('L\'email est requis');
+                    }
+                    if (!emailRegex.test(email)) {
+                        throw new Error('Format d\'email invalide');
+                    }
+                    if (email.length > 255) {
+                        throw new Error('L\'email est trop long (max 255 caractères)');
+                    }
+
                     // Simulation de vérification si l'email existe déjà
-                    // Dans un cas réel, cela ferait un appel au serveur
                     resolve({ valid: true, message: '' });
+                } catch (error) {
+                    resolve({ valid: false, message: error.message });
                 }
             }, VALIDATION_DELAY);
         });
-    }
+    };
 
-    function validatePassword(password) {
+    const validatePassword = async (password) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const hasUpperCase = /[A-Z]/.test(password);
-                const hasLowerCase = /[a-z]/.test(password);
-                const hasNumber = /[0-9]/.test(password);
-                const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                try {
+                    const hasUpperCase = /[A-Z]/.test(password);
+                    const hasLowerCase = /[a-z]/.test(password);
+                    const hasNumber = /[0-9]/.test(password);
+                    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-                if (!password) {
-                    resolve({ valid: false, message: 'Le mot de passe est requis' });
-                } else if (password.length < 8) {
-                    resolve({ valid: false, message: 'Le mot de passe doit contenir au moins 8 caractères' });
-                } else if (!hasUpperCase) {
-                    resolve({ valid: false, message: 'Le mot de passe doit contenir au moins une majuscule' });
-                } else if (!hasLowerCase) {
-                    resolve({ valid: false, message: 'Le mot de passe doit contenir au moins une minuscule' });
-                } else if (!hasNumber) {
-                    resolve({ valid: false, message: 'Le mot de passe doit contenir au moins un chiffre' });
-                } else if (!hasSpecialChar) {
-                    resolve({ valid: false, message: 'Le mot de passe doit contenir au moins un caractère spécial' });
-                } else {
+                    if (!password) {
+                        throw new Error('Le mot de passe est requis');
+                    }
+                    if (password.length < 8) {
+                        throw new Error('Le mot de passe doit contenir au moins 8 caractères');
+                    }
+                    if (!hasUpperCase) {
+                        throw new Error('Le mot de passe doit contenir au moins une majuscule');
+                    }
+                    if (!hasLowerCase) {
+                        throw new Error('Le mot de passe doit contenir au moins une minuscule');
+                    }
+                    if (!hasNumber) {
+                        throw new Error('Le mot de passe doit contenir au moins un chiffre');
+                    }
+                    if (!hasSpecialChar) {
+                        throw new Error('Le mot de passe doit contenir au moins un caractère spécial');
+                    }
+
                     resolve({ valid: true, message: '' });
+                } catch (error) {
+                    resolve({ valid: false, message: error.message });
                 }
             }, VALIDATION_DELAY);
         });
-    }
+    };
 
-    function validateConfirmPassword(password, confirmPassword) {
+    const validateConfirmPassword = async (password, confirmPassword) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                if (!confirmPassword) {
-                    resolve({ valid: false, message: 'Veuillez confirmer votre mot de passe' });
-                } else if (password !== confirmPassword) {
-                    resolve({ valid: false, message: 'Les mots de passe ne correspondent pas' });
-                } else {
+                try {
+                    if (!confirmPassword) {
+                        throw new Error('Veuillez confirmer votre mot de passe');
+                    }
+                    if (password !== confirmPassword) {
+                        throw new Error('Les mots de passe ne correspondent pas');
+                    }
+
                     resolve({ valid: true, message: '' });
+                } catch (error) {
+                    resolve({ valid: false, message: error.message });
                 }
             }, VALIDATION_DELAY);
         });
-    }
+    };
 
-    function validateAdresse(adresse) {
+    const validateAdresse = async (adresse) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                if (!adresse) {
-                    resolve({ valid: false, message: 'L\'adresse est requise' });
-                } else if (adresse.length < 5) {
-                    resolve({ valid: false, message: 'L\'adresse doit contenir au moins 5 caractères' });
-                } else if (adresse.length > 200) {
-                    resolve({ valid: false, message: 'L\'adresse est trop longue (max 200 caractères)' });
-                } else {
+                try {
+                    if (!adresse) {
+                        throw new Error('L\'adresse est requise');
+                    }
+                    if (adresse.length < 5) {
+                        throw new Error('L\'adresse doit contenir au moins 5 caractères');
+                    }
+                    if (adresse.length > 200) {
+                        throw new Error('L\'adresse est trop longue (max 200 caractères)');
+                    }
+
                     resolve({ valid: true, message: '' });
+                } catch (error) {
+                    resolve({ valid: false, message: error.message });
                 }
             }, VALIDATION_DELAY);
         });
-    }
+    };
 
-    function validateCodePostal(codePostal) {
+    const validateCodePostal = async (codePostal) => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                const codePostalRegex = /^[0-9]{5}$/;
+                try {
+                    const codePostalRegex = /^[0-9]{5}$/;
 
-                if (!codePostal) {
-                    resolve({ valid: false, message: 'Le code postal est requis' });
-                } else if (!codePostalRegex.test(codePostal)) {
-                    resolve({ valid: false, message: 'Le code postal doit contenir exactement 5 chiffres' });
-                } else {
+                    if (!codePostal) {
+                        throw new Error('Le code postal est requis');
+                    }
+                    if (!codePostalRegex.test(codePostal)) {
+                        throw new Error('Le code postal doit contenir exactement 5 chiffres');
+                    }
+
                     resolve({ valid: true, message: '' });
+                } catch (error) {
+                    resolve({ valid: false, message: error.message });
                 }
             }, VALIDATION_DELAY);
         });
-    }
+    };
 
     // ========== Fonction pour afficher les erreurs ==========
 
-    function showError(inputId, message) {
+    const showError = (inputId, message) => {
         const errorElement = document.getElementById(`${inputId}-error`);
         const inputElement = document.getElementById(inputId);
 
@@ -169,90 +214,74 @@ document.addEventListener('DOMContentLoaded', function () {
             inputElement.classList.remove('invalid');
             inputElement.classList.add('valid');
         }
-    }
+    };
+
+    // ========== Fonction de validation avec gestion d'erreurs ==========
+
+    const handleValidation = async (validator, inputId, value) => {
+        try {
+            showError(inputId, '⏳ Validation en cours...');
+            const result = await validator(value);
+            showError(inputId, result.valid ? '' : result.message);
+            return result;
+        } catch (error) {
+            console.error(`Erreur lors de la validation de ${inputId}:`, error);
+            showError(inputId, 'Une erreur est survenue lors de la validation');
+            return { valid: false, message: error.message };
+        }
+    };
 
     // ========== Configuration de la validation asynchrone pour chaque champ ==========
 
-    // Validation du nom
-    inputs.nom.addEventListener('input', function () {
-        clearTimeout(timers.nom);
-        const nom = this.value.trim();
+    // Fonction générique pour gérer les événements input avec debounce
+    const setupInputValidation = (input, validator, inputId) => {
+        input.addEventListener('input', function () {
+            clearTimeout(timers[inputId]);
+            const value = this.value.trim();
 
-        showError('nom', '⏳ Validation en cours...');
+            timers[inputId] = setTimeout(async () => {
+                await handleValidation(validator, inputId, value);
+            }, DEBOUNCE_DELAY);
+        });
 
-        timers.nom = setTimeout(async () => {
-            const result = await validateNom(nom);
-            showError('nom', result.valid ? '' : result.message);
-        }, 300);
-    });
+        input.addEventListener('blur', async function () {
+            clearTimeout(timers[inputId]);
+            await handleValidation(validator, inputId, this.value.trim());
+        });
+    };
 
-    inputs.nom.addEventListener('blur', async function () {
-        clearTimeout(timers.nom);
-        const result = await validateNom(this.value.trim());
-        showError('nom', result.valid ? '' : result.message);
-    });
+    // Configuration des validations
+    setupInputValidation(inputs.nom, validateNom, 'nom');
+    setupInputValidation(inputs.prenom, validatePrenom, 'prenom');
+    setupInputValidation(inputs.email, validateEmail, 'email');
+    setupInputValidation(inputs.adresse, validateAdresse, 'adresse');
 
-    // Validation du prénom
-    inputs.prenom.addEventListener('input', function () {
-        clearTimeout(timers.prenom);
-        const prenom = this.value.trim();
-
-        showError('prenom', '⏳ Validation en cours...');
-
-        timers.prenom = setTimeout(async () => {
-            const result = await validatePrenom(prenom);
-            showError('prenom', result.valid ? '' : result.message);
-        }, 300);
-    });
-
-    inputs.prenom.addEventListener('blur', async function () {
-        clearTimeout(timers.prenom);
-        const result = await validatePrenom(this.value.trim());
-        showError('prenom', result.valid ? '' : result.message);
-    });
-
-    // Validation de l'email
-    inputs.email.addEventListener('input', function () {
-        clearTimeout(timers.email);
-        const email = this.value.trim();
-
-        showError('email', '⏳ Validation en cours...');
-
-        timers.email = setTimeout(async () => {
-            const result = await validateEmail(email);
-            showError('email', result.valid ? '' : result.message);
-        }, 300);
-    });
-
-    inputs.email.addEventListener('blur', async function () {
-        clearTimeout(timers.email);
-        const result = await validateEmail(this.value.trim());
-        showError('email', result.valid ? '' : result.message);
-    });
-
-    // Validation du mot de passe
+    // Validation du mot de passe avec revalidation de la confirmation
     inputs.password.addEventListener('input', function () {
         clearTimeout(timers.password);
         const password = this.value;
 
-        showError('password', '⏳ Validation en cours...');
-
         timers.password = setTimeout(async () => {
-            const result = await validatePassword(password);
-            showError('password', result.valid ? '' : result.message);
+            try {
+                await handleValidation(validatePassword, 'password', password);
 
-            // Revalider la confirmation si elle a déjà été saisie
-            if (inputs.confirmPassword.value) {
-                const confirmResult = await validateConfirmPassword(password, inputs.confirmPassword.value);
-                showError('confirmPassword', confirmResult.valid ? '' : confirmResult.message);
+                // Revalider la confirmation si elle a déjà été saisie
+                if (inputs.confirmPassword.value) {
+                    await handleValidation(
+                        (val) => validateConfirmPassword(password, val),
+                        'confirmPassword',
+                        inputs.confirmPassword.value
+                    );
+                }
+            } catch (error) {
+                console.error('Erreur validation password:', error);
             }
-        }, 300);
+        }, DEBOUNCE_DELAY);
     });
 
     inputs.password.addEventListener('blur', async function () {
         clearTimeout(timers.password);
-        const result = await validatePassword(this.value);
-        showError('password', result.valid ? '' : result.message);
+        await handleValidation(validatePassword, 'password', this.value);
     });
 
     // Validation de la confirmation du mot de passe
@@ -260,40 +289,25 @@ document.addEventListener('DOMContentLoaded', function () {
         clearTimeout(timers.confirmPassword);
         const confirmPassword = this.value;
 
-        showError('confirmPassword', '⏳ Validation en cours...');
-
         timers.confirmPassword = setTimeout(async () => {
-            const result = await validateConfirmPassword(inputs.password.value, confirmPassword);
-            showError('confirmPassword', result.valid ? '' : result.message);
-        }, 300);
+            await handleValidation(
+                (val) => validateConfirmPassword(inputs.password.value, val),
+                'confirmPassword',
+                confirmPassword
+            );
+        }, DEBOUNCE_DELAY);
     });
 
     inputs.confirmPassword.addEventListener('blur', async function () {
         clearTimeout(timers.confirmPassword);
-        const result = await validateConfirmPassword(inputs.password.value, this.value);
-        showError('confirmPassword', result.valid ? '' : result.message);
+        await handleValidation(
+            (val) => validateConfirmPassword(inputs.password.value, val),
+            'confirmPassword',
+            this.value
+        );
     });
 
-    // Validation de l'adresse
-    inputs.adresse.addEventListener('input', function () {
-        clearTimeout(timers.adresse);
-        const adresse = this.value.trim();
-
-        showError('adresse', '⏳ Validation en cours...');
-
-        timers.adresse = setTimeout(async () => {
-            const result = await validateAdresse(adresse);
-            showError('adresse', result.valid ? '' : result.message);
-        }, 300);
-    });
-
-    inputs.adresse.addEventListener('blur', async function () {
-        clearTimeout(timers.adresse);
-        const result = await validateAdresse(this.value.trim());
-        showError('adresse', result.valid ? '' : result.message);
-    });
-
-    // Validation du code postal
+    // Validation du code postal avec filtrage des caractères
     inputs.codePostal.addEventListener('input', function () {
         clearTimeout(timers.codePostal);
         let codePostal = this.value.trim();
@@ -302,67 +316,94 @@ document.addEventListener('DOMContentLoaded', function () {
         codePostal = codePostal.replace(/[^0-9]/g, '');
         this.value = codePostal;
 
-        showError('codePostal', '⏳ Validation en cours...');
-
         timers.codePostal = setTimeout(async () => {
-            const result = await validateCodePostal(codePostal);
-            showError('codePostal', result.valid ? '' : result.message);
-        }, 300);
+            await handleValidation(validateCodePostal, 'codePostal', codePostal);
+        }, DEBOUNCE_DELAY);
     });
 
     inputs.codePostal.addEventListener('blur', async function () {
         clearTimeout(timers.codePostal);
-        const result = await validateCodePostal(this.value.trim());
-        showError('codePostal', result.valid ? '' : result.message);
+        await handleValidation(validateCodePostal, 'codePostal', this.value.trim());
     });
 
     // ========== Validation lors de la soumission du formulaire ==========
 
-    form.addEventListener('submit', async function (e) {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Validation de tous les champs
-        const results = {
-            nom: await validateNom(inputs.nom.value.trim()),
-            prenom: await validatePrenom(inputs.prenom.value.trim()),
-            email: await validateEmail(inputs.email.value.trim()),
-            password: await validatePassword(inputs.password.value),
-            confirmPassword: await validateConfirmPassword(inputs.password.value, inputs.confirmPassword.value),
-            adresse: await validateAdresse(inputs.adresse.value.trim()),
-            codePostal: await validateCodePostal(inputs.codePostal.value.trim())
-        };
+        try {
+            // Validation de tous les champs en parallèle avec Promise.all
+            const validations = await Promise.all([
+                validateNom(inputs.nom.value.trim()),
+                validatePrenom(inputs.prenom.value.trim()),
+                validateEmail(inputs.email.value.trim()),
+                validatePassword(inputs.password.value),
+                validateConfirmPassword(inputs.password.value, inputs.confirmPassword.value),
+                validateAdresse(inputs.adresse.value.trim()),
+                validateCodePostal(inputs.codePostal.value.trim())
+            ]);
 
-        // Afficher toutes les erreurs
-        Object.keys(results).forEach(key => {
-            showError(key, results[key].valid ? '' : results[key].message);
-        });
-
-        // Vérifier si tous les champs sont valides
-        const allValid = Object.values(results).every(result => result.valid);
-
-        if (allValid) {
-            alert('Inscription réussie !');
-
-            // Récupération des données du formulaire
-            const formData = {
-                nom: inputs.nom.value.trim(),
-                prenom: inputs.prenom.value.trim(),
-                email: inputs.email.value.trim(),
-                password: inputs.password.value,
-                adresse: inputs.adresse.value.trim(),
-                codePostal: inputs.codePostal.value.trim()
+            const results = {
+                nom: validations[0],
+                prenom: validations[1],
+                email: validations[2],
+                password: validations[3],
+                confirmPassword: validations[4],
+                adresse: validations[5],
+                codePostal: validations[6]
             };
 
-            console.log('Données d\'inscription:', formData);
-
-            // Ici, vous pouvez envoyer les données au serveur
-            // fetch('inscription.php', { method: 'POST', body: JSON.stringify(formData) })
-
-            // Réinitialisation du formulaire
-            form.reset();
-            Object.values(inputs).forEach(input => {
-                input.classList.remove('valid', 'invalid');
+            // Afficher toutes les erreurs
+            Object.keys(results).forEach(key => {
+                showError(key, results[key].valid ? '' : results[key].message);
             });
+
+            // Vérifier si tous les champs sont valides
+            const allValid = Object.values(results).every(result => result.valid);
+
+            if (allValid) {
+                // Récupération des données du formulaire
+                const formData = {
+                    nom: inputs.nom.value.trim(),
+                    prenom: inputs.prenom.value.trim(),
+                    email: inputs.email.value.trim(),
+                    password: inputs.password.value,
+                    adresse: inputs.adresse.value.trim(),
+                    codePostal: inputs.codePostal.value.trim()
+                };
+
+                console.log('Données d\'inscription:', formData);
+
+                try {
+                    // Simulation d'envoi au serveur
+                    // const response = await fetch('inscription.php', {
+                    //     method: 'POST',
+                    //     headers: { 'Content-Type': 'application/json' },
+                    //     body: JSON.stringify(formData)
+                    // });
+                    //
+                    // if (!response.ok) {
+                    //     throw new Error('Erreur lors de l\'inscription');
+                    // }
+                    //
+                    // const data = await response.json();
+                    // console.log('Réponse serveur:', data);
+
+                    alert('Inscription réussie !');
+
+                    // Réinitialisation du formulaire
+                    form.reset();
+                    Object.values(inputs).forEach(input => {
+                        input.classList.remove('valid', 'invalid');
+                    });
+                } catch (error) {
+                    console.error('Erreur lors de l\'envoi:', error);
+                    alert('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
+                }
+            }
+        } catch (error) {
+            console.error('Erreur lors de la validation du formulaire:', error);
+            alert('Une erreur est survenue lors de la validation. Veuillez réessayer.');
         }
     });
 

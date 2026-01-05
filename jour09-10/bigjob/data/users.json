@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "email": "john@laplateforme.io",
+        "nom": "Doe",
+        "prenom": "John",
+        "password": "hash123",
+        "role": "user"
+    }
+]

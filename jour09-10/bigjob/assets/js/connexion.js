@@ -16,22 +16,22 @@ async function loadUsers() {
 // Fonction de connexion
 async function handleLogin(event) {
     event.preventDefault();
-    
+
     const email = document.getElementById('floatingInput').value;
     const password = document.getElementById('floatingPassword').value;
-    
+
     // Récupérer les utilisateurs
     const users = await loadUsers();
-    
+
     // Chercher l'utilisateur
     const user = users.find(u => u.email === email && u.password === password);
-    
+
     if (user) {
         // Stocker les infos de l'utilisateur dans sessionStorage
         sessionStorage.setItem('currentUser', JSON.stringify(user));
-        
+
         // Rediriger selon le rôle
-        switch(user.role) {
+        switch (user.role) {
             case 'admin':
                 window.location.href = '../administrateurs/gestion-droits.html';
                 break;
@@ -49,14 +49,8 @@ async function handleLogin(event) {
 }
 
 // Initialisation au chargement de la page
-document.addEventListener('DOMContentLoaded', function() {
-    const loginButton = document.querySelector('button[type="button"]');
-    if (loginButton) {
-        loginButton.addEventListener('click', handleLogin);
-    }
-    
-    // Permettre la connexion avec la touche Enter
-    const form = document.querySelector('form');
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('loginForm');
     if (form) {
         form.addEventListener('submit', handleLogin);
     }

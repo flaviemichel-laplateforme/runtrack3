@@ -69,30 +69,22 @@
 
     <h1 class="text-center my-5">Inscription</h1>
 
-    <form class="row g-3 mb-5 mx-5">
+    <form id="registerForm" class="row g-3 mb-5 mx-5">
         <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputEmail4">
+            <input type="email" class="form-control" id="inputEmail4" required>
         </div>
         <div class="col-md-6">
             <label for="inputPassword4" class="form-label">Password</label>
-            <input type="password" class="form-control" id="inputPassword4">
+            <input type="password" class="form-control" id="inputPassword4" required>
         </div>
         <div class="col-3">
-            <label for="inputAddress" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="Dupont">
+            <label for="inputNom" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="inputNom" placeholder="Dupont" required>
         </div>
         <div class="col-3">
-            <label for="floatingInput" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="Jean">
-        </div>
-        <div class="col-md-6">
-            <label for="inputCity" class="form-label">Ville</label>
-            <input type="text" class="form-control" id="inputCity">
-        </div>
-        <div class="col-12">
-            <label for="floatingInput" class="form-label">Adresse</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="12 Avenue de la république 83210">
+            <label for="inputPrenom" class="form-label">Prénom</label>
+            <input type="text" class="form-control" id="inputPrenom" placeholder="Jean" required>
         </div>
 
 
@@ -107,6 +99,7 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/inscription.js"></script>
 </body>
 
 </html>

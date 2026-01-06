@@ -33,6 +33,44 @@ function updateNavByRole() {
 
         if (inscriptionLink) inscriptionLink.closest('.nav-item').style.display = 'none';
         if (connexionLink) connexionLink.closest('.nav-item').style.display = 'none';
+
+        // Gérer l'affichage des dropdowns selon le rôle
+        // Méthode compatible avec tous les navigateurs
+        const allDropdowns = document.querySelectorAll('.nav-item.dropdown');
+
+        allDropdowns.forEach(dropdown => {
+            const calendrierLink = dropdown.querySelector('a[href*="calendrier.html"]');
+            const backofficeLink = dropdown.querySelector('a[href*="backoffice.html"]');
+            const gestionDroitsLink = dropdown.querySelector('a[href*="gestion-droits.html"]');
+
+            // Dropdown utilisateur - visible pour tous les connectés
+            if (calendrierLink) {
+                dropdown.style.display = 'block';
+            }
+
+            // Dropdown modérateur - visible pour moderator et admin
+            if (backofficeLink) {
+                dropdown.style.display = (user.role === 'moderator' || user.role === 'admin') ? 'block' : 'none';
+            }
+
+            // Dropdown admin - visible seulement pour admin
+            if (gestionDroitsLink) {
+                dropdown.style.display = user.role === 'admin' ? 'block' : 'none';
+            }
+        });
+    } else {
+        // Si pas connecté, afficher inscription/connexion, cacher les dropdowns utilisateur
+        const inscriptionLink = document.querySelector('a[href*="inscription.html"]');
+        const connexionLink = document.querySelector('a[href*="connexion.html"]');
+
+        if (inscriptionLink) inscriptionLink.closest('.nav-item').style.display = 'block';
+        if (connexionLink) connexionLink.closest('.nav-item').style.display = 'block';
+
+        // Cacher tous les dropdowns si non connecté
+        const allDropdowns = document.querySelectorAll('.nav-item.dropdown');
+        allDropdowns.forEach(dropdown => {
+            dropdown.style.display = 'none';
+        });
     }
 }
 

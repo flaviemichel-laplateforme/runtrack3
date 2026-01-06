@@ -20,6 +20,18 @@ async function handleLogin(event) {
     const email = document.getElementById('floatingInput').value;
     const password = document.getElementById('floatingPassword').value;
 
+    // Valider le format de l'email
+    if (!isValidEmail(email)) {
+        alert('Veuillez entrer une adresse email valide');
+        return;
+    }
+    // Validation domaine email
+
+    if (!isLaPlateformeEmail(email)) {
+        alert("Seuls les emails @laplateforme.io sont acceptés");
+        return;
+    }
+
     // Récupérer les utilisateurs
     const users = await loadUsers();
 
@@ -55,3 +67,14 @@ document.addEventListener('DOMContentLoaded', function () {
         form.addEventListener('submit', handleLogin);
     }
 });
+
+// Vérification email format
+function isValidEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+
+function isLaPlateformeEmail(email) {
+    return email.endsWith("@laplateforme.io");
+}

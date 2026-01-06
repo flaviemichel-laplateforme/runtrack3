@@ -86,3 +86,28 @@ async function getAllEvents() {
 
     return [...approved, ...pending];
 }
+
+// Gérer la soumission du formulaire
+document.getElementById('submitRequest').addEventListener('click', function () {
+    const requestData = {
+        dateDebut: document.getElementById('dateDebut').value,
+        dateFin: document.getElementById('dateFin').value,
+        heureDebut: document.getElementById('heureDebut').value,
+        heureFin: document.getElementById('heureFin').value,
+        motif: document.getElementById('motif').value,
+        description: document.getElementById('description').value,
+        location: document.getElementById('location').value
+    };
+
+    if (createPresenceRequest(requestData)) {
+        // Fermer le modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('requestModal'));
+        modal.hide();
+
+        // Réinitialiser le formulaire
+        document.getElementById('requestForm').reset();
+
+        // Recharger le calendrier
+        initCalendar();
+    }
+});

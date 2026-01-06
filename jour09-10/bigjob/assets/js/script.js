@@ -25,6 +25,7 @@ function checkAuth() {
 // Afficher/masquer les éléments selon le rôle
 function updateNavByRole() {
     const user = checkAuth();
+    const logoutBtn = document.getElementById('logoutBtn');
 
     if (user) {
         // Cacher inscription/connexion si connecté
@@ -33,6 +34,9 @@ function updateNavByRole() {
 
         if (inscriptionLink) inscriptionLink.closest('.nav-item').style.display = 'none';
         if (connexionLink) connexionLink.closest('.nav-item').style.display = 'none';
+
+        // Afficher le bouton déconnexion
+        if (logoutBtn) logoutBtn.closest('.nav-item').style.display = 'block';
 
         // Gérer l'affichage des dropdowns selon le rôle
         // Méthode compatible avec tous les navigateurs
@@ -65,6 +69,9 @@ function updateNavByRole() {
 
         if (inscriptionLink) inscriptionLink.closest('.nav-item').style.display = 'block';
         if (connexionLink) connexionLink.closest('.nav-item').style.display = 'block';
+
+        // Cacher le bouton déconnexion
+        if (logoutBtn) logoutBtn.closest('.nav-item').style.display = 'none';
 
         // Cacher tous les dropdowns si non connecté
         const allDropdowns = document.querySelectorAll('.nav-item.dropdown');

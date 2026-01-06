@@ -7,19 +7,82 @@ function isPastDate(dateString) {
     return date < today;
 }
 
-//Enregistrement d'une demande
-function addRequest(date) {
-    if (isPastDate(date)) {
-        alert("Impossible de réserver une date passée");
-        return;
+// Charger les événements depuis requests.json
+async function loadEvents() {
+    try {
+        const response = await fetch('../data/request.json');
+        if (!response.ok) throw new Error('Erreur de chargement');
+        const events = await response.json();
+        return events;
+    } catch (error) {
+        console.error('Erreur:', error);
+        return [];
     }
-    const requests = JSON.parse(localStorage.getItem("requests")) || [];
+}
+
+// Charger les demandes en attente depuis localStorage
+function loadPendingRequests() {
+    const requests = JSON.parse(localStorage.getItem("pendingRequests")) || [];
+    return requests;
+}
+
+// Créer une demande de présence (utilisateur)
+function createPresenceRequest(requestData) {
     const user = JSON.parse(sessionStorage.getItem("currentUser"));
-    requests.push({
+
+    if (!user) {
+        alert("Vous devez être connecté pour faire une demande");
+        return false;
+    }
+
+    // Vérifier les dates
+    if (isPastDate(requestData.dateDebut)) {
+        alert("Impossible de réserver une date passée");
+        return false;
+    }
+
+    // Créer la nouvelle demande au format request.json
+    const newRequest = {
         id: Date.now(),
+        people: `${user.prenom} ${user.nom}`,
+        start: `${requestData.dateDebut} ${requestData.heureDebut}`,
+        end: `${requestData.dateFin} ${requestData.heureFin}`,
+        title: requestData.motif,
+        description: requestData.description || "",
+        location: requestData.location || "Non spécifié",
+        status: "pending", // Statut pour différencier en attente/approuvé
         userId: user.id,
-        date: date,
+        userEmail: user.email,
+        dateCreation: new Date().toISOString()
+    };
+
+    // Sauvegarder dans localStorage (en attente de validation)
+    const requests = loadPendingRequests();
+    requests.push(newRequest);
+    localStorage.setItem("pendingRequests", JSON.stringify(requests));
+
+    alert("Votre demande a été envoyée et est en attente de validation par un modérateur");
+    return true;
+}
+
+// Afficher toutes les demandes (approuvées + en attente)
+async function getAllEvents() {
+    const approvedEvents = await loadEvents(); // Depuis request.json
+    const pendingRequests = loadPendingRequests(); // Depuis localStorage
+
+    // Ajouter le statut "approved" aux événements déjà dans le JSON
+    const approved = approvedEvents.map(event => ({
+        ...event,
+        title: `✓ ${event.title}`,
+        status: "approved"
+    }));
+
+    // Ajouter le statut "pending" aux demandes en attente
+    const pending = pendingRequests.map(req => ({
+        ...req,
+        title: `⏳ ${req.title}`,
         status: "pending"
-    });
-    localStorage.setItem("requests", JSON.stringify(requests));
+    }));
+
+    return [...approved, ...pending];
 }

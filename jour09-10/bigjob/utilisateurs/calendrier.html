@@ -86,7 +86,65 @@
 
 <body>
     <h1 class="text-center my-5">Calendrier</h1>
-    <label for="meeting-time">Choisir une date de présence:</label>
+
+    <!-- Formulaire de demande de présence -->
+    <div class="container mb-4">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestModal">
+            ➕ Nouvelle demande de présence
+        </button>
+    </div>
+
+    <!-- Modal pour créer une demande -->
+    <div class="modal fade" id="requestModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nouvelle demande de présence</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="requestForm">
+                        <div class="mb-3">
+                            <label for="dateDebut" class="form-label">Date de début</label>
+                            <input type="date" class="form-control" id="dateDebut" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dateFin" class="form-label">Date de fin</label>
+                            <input type="date" class="form-control" id="dateFin" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="heureDebut" class="form-label">Heure de début</label>
+                                <input type="time" class="form-control" id="heureDebut" value="09:00" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="heureFin" class="form-label">Heure de fin</label>
+                                <input type="time" class="form-control" id="heureFin" value="17:00" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="motif" class="form-label">Motif</label>
+                            <input type="text" class="form-control" id="motif" placeholder="Formation, Réunion..."
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description (optionnel)</label>
+                            <textarea class="form-control" id="description" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Lieu (optionnel)</label>
+                            <input type="text" class="form-control" id="location" placeholder="Salle A, Bureau...">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="submitRequest">Envoyer la demande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="calendar"></div>
 
     <script type="module">
@@ -97,30 +155,62 @@
             createDragAndDropPlugin(),
         ]
 
-        const calendar = createCalendar({
-            views: [viewWeek],
-            events: [
-                {
-                    id: '1',
-                    title: 'Event 1',
-                    start: '2024-08-23 09:00',
-                    end: '2024-08-23 10:00'
-                },
-            ],
-            plugins,
-        })
+        // Charger tous les événements (approuvés + en attente)
+        async function loadAllEvents() {
+            const events = await getAllEvents();
+            return events;
+        }
 
-        calendar.render(document.querySelector('.calendar'))
+        let calendar;
+
+        async function initCalendar() {
+            const events = await loadAllEvents();
+
+            calendar = createCalendar({
+                views: [viewWeek],
+                events: events,
+                plugins,
+            })
+
+            calendar.render(document.querySelector('.calendar'))
+        }
+
+        // Initialiser le calendrier
+        initCalendar();
+
+        // Gérer la soumission du formulaire
+        document.getElementById('submitRequest').addEventListener('click', function () {
+            const requestData = {
+                dateDebut: document.getElementById('dateDebut').value,
+                dateFin: document.getElementById('dateFin').value,
+                heureDebut: document.getElementById('heureDebut').value,
+                heureFin: document.getElementById('heureFin').value,
+                motif: document.getElementById('motif').value,
+                description: document.getElementById('description').value,
+                location: document.getElementById('location').value
+            };
+
+            if (createPresenceRequest(requestData)) {
+                // Fermer le modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('requestModal'));
+                modal.hide();
+
+                // Réinitialiser le formulaire
+                document.getElementById('requestForm').reset();
+
+                // Recharger le calendrier
+                initCalendar();
+            }
+        });
     </script>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/calendrier.js"></script>
 
-    <p>Attention, une
-        fois que la date est passée, on ne peut plus changer de décision.</p>
+    <p class="text-center mt-3">⏳ = En attente de validation | ✓ = Approuvé</p>
 </body>
 
 </html>

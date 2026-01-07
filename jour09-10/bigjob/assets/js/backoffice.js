@@ -1,26 +1,55 @@
-function approvedPresence() {
-    console.log(JSON.parse(localStorage.getItem("approvedRequests")));
+// Vérification de l'authentification et des droits
+function requireAuth(requiredRole) {
+    const user = JSON.parse(sessionStorage.getItem('currentUser'));
 
+    if (!user) {
+        alert("Vous devez être connecté");
+        window.location.href = '../utilisateurs/connexion.html';
+        return false;
+    }
+
+    if (requiredRole && user.role !== requiredRole && user.role !== 'admin') {
+        alert("Accès non autorisé");
+        window.location.href = '../utilisateurs/calendrier.html';
+        return false;
+    }
+
+    return true;
 }
 
-approvedPresence();
-
-// À ajouter dans backoffice.js
-async function loadPendingRequests() {
+// Charger les demandes en attente depuis localStorage
+function loadPendingRequests() {
     const requests = JSON.parse(localStorage.getItem("pendingRequests")) || [];
     displayRequestsInTable(requests);
 }
 
+// Afficher les demandes dans le tableau
 function displayRequestsInTable(requests) {
     const tbody = document.querySelector('tbody');
+
+    if (!tbody) {
+        console.error("Tableau non trouvé dans le DOM");
+        return;
+    }
+
     tbody.innerHTML = '';
 
-    requests.forEach((request, index) => {
+    if (requests.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center">Aucune demande en attente</td></tr>';
+        return;
+    }
+
+    requests.forEach((request) => {
+        // Séparer le nom et prénom
+        const nameParts = request.people.split(' ');
+        const prenom = nameParts[0] || '';
+        const nom = nameParts.slice(1).join(' ') || '';
+
         const row = `
             <tr>
                 <th scope="row">${request.id}</th>
-                <td>${request.people.split(' ')[1]}</td>
-                <td>${request.people.split(' ')[0]}</td>
+                <td>${nom}</td>
+                <td>${prenom}</td>
                 <td>${request.userEmail}</td>
                 <td>
                     <button class="btn btn-success btn-sm" onclick="approveRequest(${request.id})">
@@ -38,6 +67,7 @@ function displayRequestsInTable(requests) {
     });
 }
 
+// Approuver une demande
 function approveRequest(requestId) {
     const pending = JSON.parse(localStorage.getItem("pendingRequests")) || [];
     const request = pending.find(r => r.id === requestId);
@@ -60,7 +90,12 @@ function approveRequest(requestId) {
     }
 }
 
+// Refuser une demande
 function rejectRequest(requestId) {
+    if (!confirm("Êtes-vous sûr de vouloir refuser cette demande ?")) {
+        return;
+    }
+
     const pending = JSON.parse(localStorage.getItem("pendingRequests")) || [];
     const updatedPending = pending.filter(r => r.id !== requestId);
     localStorage.setItem("pendingRequests", JSON.stringify(updatedPending));
@@ -69,5 +104,13 @@ function rejectRequest(requestId) {
     loadPendingRequests();
 }
 
-// Charger au démarrage
-document.addEventListener('DOMContentLoaded', loadPendingRequests);
+// Initialisation au chargement de la page
+document.addEventListener('DOMContentLoaded', function () {
+    // Vérifier l'authentification
+    if (!requireAuth('moderator')) {
+        return;
+    }
+
+    // Charger les demandes en attente
+    loadPendingRequests();
+});

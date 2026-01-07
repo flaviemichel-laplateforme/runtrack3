@@ -1,15 +1,23 @@
-// Fonction pour récupérer les utilisateurs depuis le fichier JSON
+// Fonction pour récupérer les utilisateurs depuis le fichier JSON et localStorage
 async function loadUsers() {
     try {
+        // Charger depuis users.json
         const response = await fetch('../data/users.json');
-        if (!response.ok) {
-            throw new Error('Erreur lors du chargement des données');
+        let jsonUsers = [];
+
+        if (response.ok) {
+            jsonUsers = await response.json();
         }
-        const users = await response.json();
-        return users;
+
+        // Charger depuis localStorage (utilisateurs inscrits)
+        const localUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Fusionner les deux sources
+        return [...jsonUsers, ...localUsers];
     } catch (error) {
         console.error('Erreur:', error);
-        return [];
+        // En cas d'erreur, retourner au moins les utilisateurs du localStorage
+        return JSON.parse(localStorage.getItem("users")) || [];
     }
 }
 

@@ -27,7 +27,7 @@ function arreterMinuteur() {
 }
 
 function afficherTemps(secondes) {
-
+    tempsRestant = secondes;
     const heures = Math.floor(secondes / 3600);
     const minutes = Math.floor((secondes % 3600) / 60);
     const sec = secondes % 60;
@@ -81,6 +81,15 @@ boutonReset.addEventListener('click', () => {
     redemarrerMinuteur();
 })
 
+const retirer = document.getElementById('minuteurRetirer');
+const ajouter = document.getElementById('minuteurAjouter');
 
+retirer.addEventListener('click', () => {
+    afficherTemps(tempsRestant - 60)
+});
+
+ajouter.addEventListener('click', () => {
+    afficherTemps(tempsRestant + 60)
+});
 
 

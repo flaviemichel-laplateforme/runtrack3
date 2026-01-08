@@ -12,13 +12,26 @@
     <form action="">
 
         <label for="date">Chronomètre</label>
-        <input type="time" id="timeInput">
+        <input type="time" id="chronoInput">
         <button type="button" id="chronoMarcheArret">Marche/arrêt</button>
         <button type="button" id="chronoTour">Tour</button>
         <button type="button" id="chronoReset">Reset</button>
     </form>
 
-    <script src="./assets/js/horloge.js"></script>
+    <table id="tableTours">
+
+        <thead>
+            <tr>
+                <th>Tour</th>
+                <th>Temps</th>
+            </tr>
+        </thead>
+        <tbody id="listeTours">
+            <!--Les tours s'afficheront ici-->
+        </tbody>
+    </table>
+
+    <script src="./assets/js/chronometre.js"></script>
 </body>
 
 </html>

@@ -35,7 +35,7 @@ ajouterAlarme.addEventListener('click', () => {
     const celluleActions = document.createElement('td');
     const boutonSupprimer = document.createElement('button');
     boutonSupprimer.textContent = 'Supprimer';
-    boutonSupprimer.type = 'buton';
+    boutonSupprimer.type = 'button';
 
     //Ajouter évènement de suppression
     boutonSupprimer.addEventListener('click', () => {
@@ -43,7 +43,7 @@ ajouterAlarme.addEventListener('click', () => {
 
         //Supprimer du tableau reveilAlarme
         const index = reveilAlarme.findIndex(a => a.heure === heure && a.message === message);
-        if (indexx > -1) {
+        if (index > -1) {
             reveilAlarme.splice(index, 1);
         }
 
@@ -63,3 +63,59 @@ ajouterAlarme.addEventListener('click', () => {
     reveilInput.value = '';
     nomReveilInput.value = '';
 })
+
+//fonction pour vérifier les alarmes
+function verifierAlarmes() {
+    const maintenant = new Date();
+    const heures = maintenant.getHours().toString().padStart(2, '0');
+    const minutes = maintenant.getMinutes().toString().padStart(2, '0');
+    const heureActuelle = heures + ':' + minutes;
+
+    //Parcourir toutes les alarmes
+    reveilAlarme.forEach((alarme, index) => {
+        if (alarme.active && alarme.heure === heureActuelle) {
+            alert('ALARME ! ' + alarme.message);
+
+            alarme.active = false;
+
+            //Changer le statut dans le tablea html
+            const lignes = listeAlarmes.getElementsByTagName('tr');
+            lignes[index].cells[2].textContent = 'Déclenchée';
+        }
+    });
+
+    mettreAJourStatuts();
+
+}
+
+function mettreAJourStatuts() {
+    const maintenant = new Date();
+
+    reveilAlarme.forEach((alarme, index) => {
+        if (!alarme.active) return; // Si déclenchée, ne rien faire
+
+        const [heureAlarme, minuteAlarme] = alarme.heure.split(':');
+        const dateAlarme = new Date();
+        dateAlarme.setHours(parseInt(heureAlarme));
+        dateAlarme.setMinutes(parseInt(minuteAlarme));
+        dateAlarme.setSeconds(0);
+
+        // Si l'heure est déjà passée aujourd'hui, programmer pour demain
+        if (dateAlarme <= maintenant) {
+            dateAlarme.setDate(dateAlarme.getDate() + 1);
+        }
+
+        // Calculer la différence en millisecondes
+        const diff = dateAlarme - maintenant;
+        const heuresRestantes = Math.floor(diff / (1000 * 60 * 60));
+        const minutesRestantes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        // Afficher le statut
+        const lignes = listeAlarmes.getElementsByTagName('tr');
+        if (lignes[index]) {
+            lignes[index].cells[2].textContent = `Dans ${heuresRestantes}h ${minutesRestantes}min`;
+        }
+    });
+}
+
+setInterval(verifierAlarmes, 1000);

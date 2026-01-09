@@ -127,4 +127,3 @@ function mettreAJourStatuts() {
 
 setInterval(verifierAlarmes, 1000);
 
-setInterval(verifierAlarmes, 1000);

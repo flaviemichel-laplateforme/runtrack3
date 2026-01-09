@@ -148,7 +148,9 @@ Projet créé dans le cadre de la formation développement web - RunTrack3 Jour 
 
 ## 📄 Licence
 
-Projet éducatif - Libre d'utilisation
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+Les bibliothèques tierces utilisées (Bootstrap, Google Fonts) ont leurs propres licences. Voir [THIRD-PARTY-LICENSES.md](THIRD-PARTY-LICENSES.md).
 
 ---
 

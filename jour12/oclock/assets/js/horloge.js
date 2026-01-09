@@ -1,3 +1,10 @@
+/**
+ * O'Clock - Horloge Module
+ * Copyright (c) 2026 Flavie Michel
+ * Licensed under MIT License
+ * See LICENSE file for details
+ */
+
 const currentTimeDisplay = document.getElementById('currentTime');
 
 function formatNumber(num) {

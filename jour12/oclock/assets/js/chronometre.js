@@ -1,3 +1,10 @@
+/**
+ * O'Clock - Chronomètre Module
+ * Copyright (c) 2026 Flavie Michel
+ * Licensed under MIT License
+ * See LICENSE file for details
+ */
+
 const chronoDisplay = document.getElementById('chronoDisplay');
 
 function formatNumber(num) {

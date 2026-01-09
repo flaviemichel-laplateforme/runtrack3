@@ -1,3 +1,10 @@
+/**
+ * O'Clock - Réveil/Alarme Module
+ * Copyright (c) 2026 Flavie Michel
+ * Licensed under MIT License
+ * See LICENSE file for details
+ */
+
 const nomReveilInput = document.getElementById('nomReveilInput');
 const reveilInput = document.getElementById('reveilInput');
 const ajouterAlarme = document.getElementById('ajouterAlarme');

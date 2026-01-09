@@ -1,3 +1,10 @@
+/**
+ * O'Clock - Minuteur Module
+ * Copyright (c) 2026 Flavie Michel
+ * Licensed under MIT License
+ * See LICENSE file for details
+ */
+
 const minuteurDisplay = document.getElementById('minuteurDisplay');
 
 let tempsRestant = 300;

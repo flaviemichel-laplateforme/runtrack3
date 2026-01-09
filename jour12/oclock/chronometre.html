@@ -15,7 +15,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="reveil.html">Alarme</a>
+            <a class="navbar-brand" href="index.html">Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,10 +23,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Horloge</a>
+                        <a class="nav-link" href="index.html">Horloge</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="chronometre.html">chronomètre</a>
+                        <a class="nav-link active" aria-current="page" href="chronometre.html">Chronomètre</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="minuteur.html">Minuteur</a>
@@ -39,28 +39,38 @@
 </header>
 
 <body>
-    <h1>Chronomètre</h1>
-    <form action="">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="clock-container">
+                    <h1>Chronomètre</h1>
+                    <div class="time-display text-center" id="chronoDisplay">00:00:00</div>
 
-        <label for="date">Chronomètre</label>
-        <input type="time" id="chronoInput">
-        <button type="button" id="chronoMarcheArret">Marche/arrêt</button>
-        <button type="button" id="chronoTour">Tour</button>
-        <button type="button" id="chronoReset">Reset</button>
-    </form>
+                    <form action="">
+                        <div class="text-center">
+                            <button type="button" id="chronoMarcheArret" class="btn-neon">Marche/Arrêt</button>
+                            <button type="button" id="chronoTour">Tour</button>
+                            <button type="button" id="chronoReset">Reset</button>
+                        </div>
+                    </form>
 
-    <table id="tableTours">
-
-        <thead>
-            <tr>
-                <th>Tour</th>
-                <th>Temps</th>
-            </tr>
-        </thead>
-        <tbody id="listeTours">
-            <!--Les tours s'afficheront ici-->
-        </tbody>
-    </table>
+                    <div class="table-responsive mt-4">
+                        <table id="tableTours" class="table table-dark table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tour</th>
+                                    <th>Temps</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listeTours">
+                                <!--Les tours s'afficheront ici-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="./assets/js/chronometre.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

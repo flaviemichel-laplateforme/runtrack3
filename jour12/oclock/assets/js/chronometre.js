@@ -1,8 +1,7 @@
-const chronoInput = document.getElementById('chronoInput')
+const chronoDisplay = document.getElementById('chronoDisplay');
 
 function formatNumber(num) {
     return num < 10 ? "0" + num : num;
-
 }
 
 let tempsEcoule = 0;
@@ -40,7 +39,7 @@ function afficherTemps(secondes) {
     const sec = secondes % 60;
 
     const heureFormatee = `${formatNumber(heures)}:${formatNumber(minutes)}:${formatNumber(sec)}`;
-    chronoInput.value = heureFormatee;
+    chronoDisplay.textContent = heureFormatee;
 }
 
 const chronoTour = document.getElementById('chronoTour');
@@ -73,8 +72,19 @@ function enregistrerTour() {
 }
 
 const chronoMarcheArret = document.getElementById('chronoMarcheArret');
-
 chronoMarcheArret.addEventListener('click', () => {
     toggleChrono();
-})
+});
 
+const chronoReset = document.getElementById('chronoReset');
+chronoReset.addEventListener('click', () => {
+    arreterChrono();
+    tempsEcoule = 0;
+    enMarche = false;
+    afficherTemps(0);
+
+    // Vider le tableau des tours
+    const listeTours = document.getElementById('listeTours');
+    listeTours.innerHTML = '';
+    tour = [];
+});

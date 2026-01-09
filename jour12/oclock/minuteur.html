@@ -15,7 +15,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="reveil.html">Alarme</a>
+            <a class="navbar-brand" href="index.html">Menu</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,13 +23,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Horloge</a>
+                        <a class="nav-link" href="index.html">Horloge</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="chronometre.html">chronomètre</a>
+                        <a class="nav-link" href="chronometre.html">Chronomètre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="minuteur.html">Minuteur</a>
+                        <a class="nav-link active" aria-current="page" href="minuteur.html">Minuteur</a>
                     </li>
 
                 </ul>
@@ -39,19 +39,31 @@
 </header>
 
 <body>
-    <h1>Minuteur</h1>
-    <form action="">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="clock-container">
+                    <h1>Minuteur</h1>
 
-        <label for="date"></label>
-        <input type="time" id="minuteurInput">
+                    <div class="d-flex justify-content-center align-items-center gap-3">
+                        <div class="time-display text-center" id="minuteurDisplay">00:05:00</div>
+                        <div class="d-flex flex-column gap-2">
+                            <button type="button" id="minuteurAjouter" class="btn-arrow">▲</button>
+                            <button type="button" id="minuteurRetirer" class="btn-arrow">▼</button>
+                        </div>
+                    </div>
 
-        <button type="button" id="minuteurDemarrer">Démarrer</button>
-        <button type="button" id="minuteurStop">Stop</button>
-        <button type="button" id="minuteurReset">Reset</button>
-        <button type="button" id="minuteurAjouter">+1</button>
-        <button type="button" id="minuteurRetirer">-1</button>
-    </form>
-
+                    <form action="">
+                        <div class="text-center mt-4">
+                            <button type="button" id="minuteurDemarrer" class="btn-neon">Démarrer</button>
+                            <button type="button" id="minuteurStop">Stop</button>
+                            <button type="button" id="minuteurReset">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="./assets/js/minuteur.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

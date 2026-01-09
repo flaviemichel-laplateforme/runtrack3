@@ -1,4 +1,4 @@
-const minuteurInput = document.getElementById('minuteurInput');
+const minuteurDisplay = document.getElementById('minuteurDisplay');
 
 let tempsRestant = 300;
 let intervalId = null;
@@ -34,37 +34,18 @@ function afficherTemps(secondes) {
 
 
     const heureFormatee = `${formatNumber(heures)}:${formatNumber(minutes)}:${formatNumber(sec)}`;
-    minuteurInput.value = heureFormatee;
+    minuteurDisplay.textContent = heureFormatee;
 
 }
 
 afficherTemps(300);
-console.log(minuteurInput);
 
 
 console.log(tempsRestant);
 
 function formatNumber(num) {
     return num < 10 ? "0" + num : num;
-
 }
-
-minuteurInput.addEventListener('change', () => {
-    const valeur = minuteurInput.value;
-    const parties = valeur.split(':');
-
-    if (parties.length === 3) {
-        const heures = parseInt(parties[0]) || 0;
-        const minutes = parseInt(parties[1]) || 0;
-        const secondes = parseInt(parties[2]) || 0;
-
-        tempsRestant = (heures * 3600) + (minutes * 60) + secondes;
-    }
-})
-console.log(formatNumber(5));
-
-
-
 
 const boutonDemarrer = document.getElementById('minuteurDemarrer');
 const boutonStop = document.getElementById('minuteurStop');
@@ -76,21 +57,21 @@ boutonDemarrer.addEventListener('click', () => {
 
 boutonStop.addEventListener('click', () => {
     arreterMinuteur();
-})
+});
 
 boutonReset.addEventListener('click', () => {
     redemarrerMinuteur();
-})
+});
 
 const retirer = document.getElementById('minuteurRetirer');
 const ajouter = document.getElementById('minuteurAjouter');
 
 retirer.addEventListener('click', () => {
-    afficherTemps(tempsRestant - 60)
+    afficherTemps(tempsRestant - 60);
 });
 
 ajouter.addEventListener('click', () => {
-    afficherTemps(tempsRestant + 60)
+    afficherTemps(tempsRestant + 60);
 });
 
 

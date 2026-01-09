@@ -9,19 +9,25 @@ const minuteurDisplay = document.getElementById('minuteurDisplay');
 
 let tempsRestant = 300;
 let intervalId = null;
+let chronoIsStart = null;
 
 function demarrerMinuteur() {
-    intervalId = setInterval(function () {
-        tempsRestant--;
-        console.log("temps restant: ", tempsRestant);
-        afficherTemps(tempsRestant);
+    if (chronoIsStart === null) {
+        intervalId = setInterval(function () {
+            tempsRestant--;
+            console.log("temps restant: ", tempsRestant);
+            afficherTemps(tempsRestant);
 
-        if (tempsRestant <= 0) {
-            arreterMinuteur();
-            alert('Le temps est écoulé');
-        }
-    }, 1000);
+            if (tempsRestant <= 0) {
+                arreterMinuteur();
+                alert('Le temps est écoulé');
+
+            }
+        }, 1000);
+        chronoIsStart = true;
+    }
 }
+
 function redemarrerMinuteur() {
     arreterMinuteur();
     tempsRestant = 300;
@@ -31,6 +37,7 @@ function redemarrerMinuteur() {
 function arreterMinuteur() {
     // Arrêter l'interval
     clearInterval(intervalId);
+    chronoIsStart = null;
 }
 
 function afficherTemps(secondes) {

@@ -37,6 +37,7 @@ function afficherTemps(secondes) {
     minuteurInput.value = heureFormatee;
 
 }
+
 afficherTemps(300);
 console.log(minuteurInput);
 

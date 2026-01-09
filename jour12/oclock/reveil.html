@@ -7,6 +7,10 @@
     <title>Réveil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -35,35 +39,48 @@
 </header>
 
 <body>
-    <h1>Réveil</h1>
-    <form action="">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="clock-container">
+                    <h1>Réveil</h1>
 
-        <label for="nomReveilInput">Nom de l'alarme</label>
-        <input type="text" id="nomReveilInput">
+                    <form action="">
+                        <div class="row g-3">
+                            <div class="col-12 col-md-6">
+                                <label for="nomReveilInput" class="form-label">Nom de l'alarme</label>
+                                <input type="text" id="nomReveilInput" class="form-control">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="reveilInput" class="form-label">Heure</label>
+                                <input type="time" id="reveilInput" class="form-control">
+                            </div>
+                        </div>
 
-        <label for="date"></label>
-        <input type="time" id="reveilInput">
+                        <div class="text-center mt-4">
+                            <button type="button" id="ajouterAlarme" class="btn-neon">Ajouter une alarme</button>
+                        </div>
+                    </form>
 
-
-        <button type="button" id="ajouterAlarme">Ajouter une alarme</button>
-
-
-    </form>
-
-    <table id="tableAlarme">
-
-        <thead>
-            <tr>
-                <th>Alarme heure</th>
-                <th>Message</th>
-                <th>Statut</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="listeAlarmes">
-            <!--Les tours s'afficheront ici-->
-        </tbody>
-    </table>
+                    <div class="table-responsive mt-4">
+                        <table id="tableAlarme" class="table table-dark table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Alarme heure</th>
+                                    <th>Message</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listeAlarmes">
+                                <!--Les alarmes s'afficheront ici-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="./assets/js/reveil.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

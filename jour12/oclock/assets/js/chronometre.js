@@ -9,13 +9,21 @@ let intervalId = null;
 let enMarche = false;
 let tour = [];
 
+const chronoMarcheArret = document.getElementById('chronoMarcheArret');
+
 function toggleChrono() {
     if (enMarche) {
         arreterChrono();
         enMarche = false;
+        chronoMarcheArret.classList.remove('btn-pause');
+        chronoMarcheArret.classList.add('btn-neon');
+        chronoMarcheArret.textContent = 'Démarrer';
     } else {
         demarrerChrono();
         enMarche = true;
+        chronoMarcheArret.classList.remove('btn-neon');
+        chronoMarcheArret.classList.add('btn-pause');
+        chronoMarcheArret.textContent = 'Pause';
     }
 }
 
@@ -71,7 +79,6 @@ function enregistrerTour() {
     listeTours.appendChild(nouvelleLigne);
 }
 
-const chronoMarcheArret = document.getElementById('chronoMarcheArret');
 chronoMarcheArret.addEventListener('click', () => {
     toggleChrono();
 });

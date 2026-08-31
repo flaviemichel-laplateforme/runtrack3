@@ -1,0 +1,52 @@
+O'Clock - Application de Gestion du Temps
+Copyright (c) 2026 Flavie Michel
+
+This product includes software developed by Flavie Michel
+as part of the RunTrack3 web development training program.
+
+================================================================================
+
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+
+This project incorporates components from the following third-party projects:
+
+1. Bootstrap (v5.3.8)
+   Copyright (c) 2011-2024 The Bootstrap Authors
+   Licensed under MIT License
+   https://getbootstrap.com/
+
+2. Google Fonts - Inter
+   Copyright 2020 The Inter Project Authors
+   Licensed under SIL Open Font License 1.1
+   https://fonts.google.com/specimen/Inter
+
+For complete license texts, see THIRD-PARTY-LICENSES.md
+
+================================================================================
+
+DISCLAIMER
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+This application is provided for educational and personal use. The alarm
+and timer features are not guaranteed to be accurate or reliable for
+critical time-sensitive operations. The author assumes no responsibility
+for missed alarms, incorrect time displays, or any consequences resulting
+from the use of this software.
+
+Users are responsible for verifying the accuracy of all time-related
+functions before relying on them for important tasks.
+
+================================================================================
+
+For questions or concerns, please refer to the project repository:
+https://github.com/flaviemichel-laplateforme/runtrack3
+
+Last updated: January 9, 2026

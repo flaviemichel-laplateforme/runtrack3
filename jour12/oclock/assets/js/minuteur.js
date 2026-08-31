@@ -81,7 +81,7 @@ const retirer = document.getElementById('minuteurRetirer');
 const ajouter = document.getElementById('minuteurAjouter');
 
 retirer.addEventListener('click', () => {
-    afficherTemps(tempsRestant - 60);
+    afficherTemps(Math.max(0, tempsRestant - 60));
 });
 
 ajouter.addEventListener('click', () => {

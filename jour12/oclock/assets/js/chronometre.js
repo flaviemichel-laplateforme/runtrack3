@@ -96,6 +96,9 @@ chronoReset.addEventListener('click', () => {
     tempsEcoule = 0;
     enMarche = false;
     afficherTemps(0);
+    chronoMarcheArret.classList.remove('btn-pause');
+    chronoMarcheArret.classList.add('btn-neon');
+    chronoMarcheArret.textContent = 'Démarrer';
 
     // Vider le tableau des tours
     const listeTours = document.getElementById('listeTours');
